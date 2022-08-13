@@ -268,7 +268,7 @@ def launch(
 
 
 @click.command()
-@click.option('--env', type=str, default='FetchReacher-v1', help='the name of the OpenAI Gym environment that you want to train on')
+@click.option('--env', type=str, default='CartPole-v0', help='the name of the OpenAI Gym environment that you want to train on')
 @click.option('--logdir', type=str, default='/tmp/newlog', help='the path to where logs and policy pickles should go. If not specified, creates a folder in /tmp/')
 @click.option('--n_epochs', type=int, default=40, help='the number of training epochs to run')
 @click.option('--num_cpu', type=int, default=4, help='the number of CPU cores to use (using MPI)')
