@@ -19,7 +19,7 @@ python test.py -a=10 -c=5 -t=200 -p logs
 ## Prerequisites for this github
 Ubuntu 18.04
 
-Install ros kinetic
+Install ros kinetic from source - did not work
 ```
 sudo apt-get install python-rosdep python-rosinstall-generator python-wstool python-rosinstall build-essential
 sudo rosdep init
@@ -27,10 +27,31 @@ rosdep update
 cd ..
 mkdir ~/ros_catkin_ws
 cd ~/ros_catkin_ws
+pip install -U rosdep rosinstall_generator wstool rosinstall
 rosinstall_generator desktop_full --rosdistro kinetic --deps --wet-only --tar > kinetic-desktop-full-wet.rosinstall
+pip install pyyaml==5.4.1
 wstool init -j8 src kinetic-desktop-full-wet.rosinstall 
+pip install cmake
+sudo apt-get install cmake
+pip install empy
 rosdep install --from-paths src --ignore-src --rosdistro kinetic -y
 ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release 
+```
+
+Install ros melodic - if installation from source did not work for kinetic
+```
+sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+sudo apt install curl
+curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
+sudo apt update
+sudo dpkg --configure -a
+sudo apt install ros-melodic-desktop-full
+echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
+source ~/.bashrc
+sudo apt install python-rosdep python-rosinstall python-rosinstall-generator python-wstool build-essential
+sudo apt install python-rosdep
+sudo rosdep init
+rosdep update
 ```
 
 Other requirements
