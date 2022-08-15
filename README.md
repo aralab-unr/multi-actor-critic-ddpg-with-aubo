@@ -149,7 +149,7 @@ sudo gedit /home/adarshsehgal/.local/lib/python3.5/site-packages/pkg_resources/_
 change f"{v} is an invalid version and will not be supported in " to v+" is an invalid version and will not be supported in "
 ```
 
-- Create catkin workspace
+- Create catkin workspace (run all commands within conda environment)
 ```
 conda create -n opensim-rl -c kidzik -c conda-forge opensim python=3.6.1
 conda activate opensim-rl
@@ -165,6 +165,7 @@ cd aubo_robot
 git checkout kinetic
 cd ~/catkin_workspace/
 catkin build # follow solution above for moveit error
+export ROS_PACKAGE_PATH=/home/adarshsehgal/catkin_workspace/src:/opt/ros/kinetic/share:/opt/ros/kinetic/share/ros:$ROS_PACKAGE_PATH
 ```
 
 - Install conda and create environment
@@ -187,12 +188,13 @@ pip3 install scipy tqdm joblib cloudpickle click opencv-python
 cd ~/catkin_workspace/src
 git clone https://github.com/adarshsehgal/openai_ros
 git clone https://bitbucket.org/theconstructcore/theconstruct_msgs/src/master/
+cd openai_ros
+git checkout kinetic_devel
 cd ..
 catkin build
-rosdep update
-rosdep install --from-paths /home/adarshsehgal/catkin_workspace/src --ignore-src -y --rosdistro=kinetic
+rosdep update --include-eol-distros
 source devel/setup.bash
-source /opt/ros/kinetic/setup.bash
+rosdep install --from-paths src --ignore-src -y --rosdistro=kinetic
 rosdep install openai_ros
 ```
 - update pip3 to 21.0 or latest (if no errors)
@@ -206,10 +208,14 @@ sudo apt install libpython3.7-dev
 pip3 install mpi4py
 ```
 - No need to install mujoco-py, since the code uses Rviz
-- Genetic algorithm library
+- GPU packages installation (Ubuntu 16.04) - https://towardsdatascience.com/deep-learning-gpu-installation-on-ubuntu-18-4-9b12230a1d31
+  - Make sure graphic card driver AND Cuda is installed
+  - Use the link to find all the steps
+  - Other link: https://medium.com/@kapilvarshney/how-to-setup-ubuntu-16-04-with-cuda-gpu-and-other-requirements-for-deep-learning-f547db75f227
+  - Cuda download link: https://developer.nvidia.com/cuda-80-ga2-download-archive
 ```
-pip3 install https://github.com/chovanecm/python-genetic-algorithm/archive/master.zip#egg=mchgenalg
-https://github.com/adarshsehgal/python-genetic-algorithm.git
+pip3 install xgboost
+sudo apt-get install python3-apt
 ```
 
 ## How to run the program
@@ -220,6 +226,7 @@ https://github.com/adarshsehgal/python-genetic-algorithm.git
 conda activate opensim-rl
 cd catkin_workspace
 catkin build
+rosdep update --include-eol-distros
 source devel/setup.bash
 rosdep install openai_ros
 ```
@@ -232,8 +239,7 @@ git clone <github url>
 Training without simulation first, allows for the use of multiple CPU cores. 
 To begin training using default values from openai (make sure to comment out lines with sys.exit() in train.py inorder for the python file to work as intended): 
 ```
-cd ~/workout/multi-actor-critic-ddpg-with-aubo
-
+cd ~/workspace/multi-actor-critic-ddpg-with-aubo
 python3 train.py
 ```
 The best policy will be generated in the directory `/tmp/newlog` (OR the log directory you specify).

@@ -91,55 +91,55 @@ def train(policy, rollout_worker, evaluator,
         global is_not_done
         average_success += success_rate
 
-        if success_rate >= 0.9:
-            total_success += 1
-        else:
-            total_success = 0
+        # if success_rate >= 0.9:
+        #     total_success += 1
+        # else:
+        #     total_success = 0
         
 
 
-        if total_success >= 3: 
-            logger.info('Saving epochs to file...')
-            with open('epochs.txt', 'w') as output:
-                output.write(str(epoch+1))
+        # if total_success >= 3:
+            # logger.info('Saving epochs to file...')
+            # with open('epochs.txt', 'w') as output:
+            #     output.write(str(epoch+1))
             #Exit training if maximum success rate reached
             
-            if is_not_done:
-
-                row_list1 = [str(datetime.datetime.now() - begin_time)]
-                with open('aubo_time.csv', 'a', encoding='UTF8', newline= '') as f:
-                    writer = csv.writer(f)
-                    writer.writerow(row_list1)
-                is_not_done = False
+            # if is_not_done:
+            #
+            #     row_list1 = [str(datetime.datetime.now() - begin_time)]
+            #     with open('aubo_time.csv', 'a', encoding='UTF8', newline= '') as f:
+            #         writer = csv.writer(f)
+            #         writer.writerow(row_list1)
+            #     is_not_done = False
                 
-            epoch_to_save = epoch+1
-            to_save = average_success / epoch_to_save
-            row_list1 = [epoch_to_save, to_save]
-
-            with open('ga_success.csv', 'a', encoding='UTF8', newline= '') as f:
-                writer = csv.writer(f)
-                writer.writerow(row_list1)
+            # epoch_to_save = epoch+1
+            # to_save = average_success / epoch_to_save
+            # row_list1 = [epoch_to_save, to_save]
+            #
+            # with open('ga_success.csv', 'a', encoding='UTF8', newline= '') as f:
+            #     writer = csv.writer(f)
+            #     writer.writerow(row_list1)
             
-            sys.exit()
-        if epoch==(n_epochs-1):
-            logger.info('Maximum success rate not reached. Saving maximum epochs to file...')
-            with open('epochs.txt', 'w') as output:
-                output.write(str(n_epochs))
-            row_list1 = [str(datetime.datetime.now() - begin_time)]
-            if is_not_done:
-                with open('aubo_time.csv', 'a', encoding='UTF8', newline= '') as f:
-                    writer = csv.writer(f)
-                    writer.writerow(row_list1)
-            epoch_to_save = n_epochs
-
-            to_save = average_success / epoch_to_save
-            row_list1 = [epoch_to_save, to_save]
-
-            with open('ga_success.csv', 'a', encoding='UTF8', newline= '') as f:
-                writer = csv.writer(f)
-                writer.writerow(row_list1)
-
-            sys.exit()   
+            # sys.exit()
+        # if epoch==(n_epochs-1):
+        #     logger.info('Maximum success rate not reached. Saving maximum epochs to file...')
+        #     with open('epochs.txt', 'w') as output:
+        #         output.write(str(n_epochs))
+        #     row_list1 = [str(datetime.datetime.now() - begin_time)]
+        #     if is_not_done:
+        #         with open('aubo_time.csv', 'a', encoding='UTF8', newline= '') as f:
+        #             writer = csv.writer(f)
+        #             writer.writerow(row_list1)
+        #     epoch_to_save = n_epochs
+        #
+        #     to_save = average_success / epoch_to_save
+        #     row_list1 = [epoch_to_save, to_save]
+        #
+        #     with open('ga_success.csv', 'a', encoding='UTF8', newline= '') as f:
+        #         writer = csv.writer(f)
+        #         writer.writerow(row_list1)
+        #
+        #     sys.exit()
 
         if rank == 0 and success_rate >= best_success_rate and save_policies:
             best_success_rate = success_rate
@@ -263,15 +263,12 @@ def launch(
         n_cycles=params['n_cycles'], n_batches=params['n_batches'],
         policy_save_interval=policy_save_interval, save_policies=save_policies)
 
-    
-
-
     return epochs
 
 
 @click.command()
-@click.option('--env', type=str, default='CartPole-v0', help='the name of the OpenAI Gym environment that you want to train on')
-@click.option('--logdir', type=str, default='/tmp/newlog', help='the path to where logs and policy pickles should go. If not specified, creates a folder in /tmp/')
+@click.option('--env', type=str, default='AuboReach-v3', help='the name of the OpenAI Gym environment that you want to train on')
+@click.option('--logdir', type=str, default='/tmp/multi-actor-critic-ddpg-with-aubo', help='the path to where logs and policy pickles should go. If not specified, creates a folder in /tmp/')
 @click.option('--n_epochs', type=int, default=40, help='the number of training epochs to run')
 @click.option('--num_cpu', type=int, default=4, help='the number of CPU cores to use (using MPI)')
 @click.option('--seed', type=int, default=0, help='the random seed used to seed both the environment and the training code')
