@@ -90,6 +90,9 @@ sudo apt-get install ros-kinetic-industrial-msgs
 sudo apt-get install ros-kinetic-industrial-utils
 sudo apt install python3-pip
 pip3 install -U catkin_tools
+pip3 install click
+conda install Pillow
+
 ```
 
 - Must have compiled the aubo robot github repo under the kinetic branch,which can be found here:
@@ -148,6 +151,10 @@ change f"{v} is an invalid version and will not be supported in " to v+" is an i
 
 - Create catkin workspace
 ```
+conda create -n opensim-rl -c kidzik -c conda-forge opensim python=3.6.1
+conda activate opensim-rl
+sudo apt install gfortran libblas-dev liblapack-dev libatlas-dev
+pip3 install rospkg
 source /opt/ros/kinetic/setup.bash
 mkdir -p ~/catkin_workspace/src
 cd ~/catkin_workspace/
@@ -173,7 +180,7 @@ conda create -n opensim-rl -c kidzik -c conda-forge opensim python=3.6.1
 ```
 pip3 install scipy tqdm joblib cloudpickle click opencv-python
 ```
-- pip install tensorflow==1.14.0
+- pip3 install tensorflow_gpu==1.14.0
 - openai_ros
   - IMPORTANT: run rosdep install openai_ros EACH time you run the code (for each terminal)
 ```
@@ -182,9 +189,10 @@ git clone https://github.com/adarshsehgal/openai_ros
 git clone https://bitbucket.org/theconstructcore/theconstruct_msgs/src/master/
 cd ..
 catkin build
-sudo apt install libsdl2-ttf-dev
 rosdep update
+rosdep install --from-paths /home/adarshsehgal/catkin_workspace/src --ignore-src -y --rosdistro=kinetic
 source devel/setup.bash
+source /opt/ros/kinetic/setup.bash
 rosdep install openai_ros
 ```
 - update pip3 to 21.0 or latest (if no errors)
@@ -209,6 +217,7 @@ https://github.com/adarshsehgal/python-genetic-algorithm.git
 
 **Before running roslaunch command, setup aubo robot repository with ros kinetic (link in pre requite section)**
 ```
+conda activate opensim-rl
 cd catkin_workspace
 catkin build
 source devel/setup.bash
