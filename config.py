@@ -107,7 +107,8 @@ def prepare_params(kwargs):
                  'polyak',
                  'batch_size', 'Q_lr', 'pi_lr',
                  'norm_eps', 'norm_clip', 'max_u',
-                 'action_l2', 'clip_obs', 'scope', 'relative_goals']:
+                 'action_l2', 'clip_obs', 'scope', 'relative_goals',
+                 'number_actors', 'number_critics']:
         ddpg_params[name] = kwargs[name]
         kwargs['_' + name] = kwargs[name]
         del kwargs[name]

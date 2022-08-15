@@ -161,7 +161,7 @@ def train(policy, rollout_worker, evaluator,
 
 def launch(
     env, logdir, n_epochs, num_cpu, seed, replay_strategy, policy_save_interval, clip_return, polyak_value, gamma_value, q_learning, pi_learning, random_epsilon, noise_epsilon,
-    override_params={}, save_policies=True,
+        number_actors, number_critics, override_params={}, save_policies=True,
 ):
     # Fork for multi-CPU MPI implementation.
     if num_cpu > 1:
@@ -203,6 +203,8 @@ def launch(
     params['random_eps'] = random_epsilon
     params['noise_eps'] = noise_epsilon
     params['replay_strategy'] = replay_strategy
+    params['number_actors'] = number_actors
+    params['number_critics'] = number_critics
     if env in config.DEFAULT_ENV_PARAMS:
         params.update(config.DEFAULT_ENV_PARAMS[env])  # merge env-specific parameters in
     params.update(**override_params)  # makes it possible to override any parameter
@@ -282,6 +284,8 @@ def launch(
 @click.option('--pi_learning', type=float, default=0.001, help='actor learning rate')
 @click.option('--random_epsilon', type=float, default=0.3, help='percentage of time a random action is taken')
 @click.option('--noise_epsilon', type=float, default=0.2, help='std of gaussian noise added to not-completely-random actions as a percentage of max_u')
+@click.option('--number_actors', type=int, default=1, help='number of actors to to used')
+@click.option('--number_critics', type=int, default=1, help='number of critics to to used')
 def main(**kwargs):
     launch(**kwargs)
 
