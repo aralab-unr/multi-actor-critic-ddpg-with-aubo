@@ -28,7 +28,7 @@ import logger
 register(
     id='AuboReach-v3',
     entry_point='aubo_reach6_env:PickbotEnv',
-    max_episode_steps=50,  # 100
+    max_episode_steps=100,  # 50
 )
 
 

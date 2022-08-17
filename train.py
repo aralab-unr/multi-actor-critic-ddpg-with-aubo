@@ -1,6 +1,4 @@
-import os
 import sys
-
 import click
 import numpy as np
 import json
@@ -14,6 +12,7 @@ from mpi_moments import mpi_moments
 import config as config
 from rollout import RolloutWorker
 from util import mpi_fork
+import os
 
 total_success = 0
 average_success = 0
@@ -228,7 +227,10 @@ def launch(
         logger.warn()
 
     dims = config.configure_dims(params)
-    policy = config.configure_ddpg(dims=dims, params=params, clip_return=clip_return)
+    if params['rl_algo'] == 'ddpg_multi_actor_critic':
+        policy = config.configure_ddpg_multi_actor_critic(dims=dims, params=params, clip_return=clip_return)
+    else:
+        policy = config.configure_ddpg(dims=dims, params=params, clip_return=clip_return)
 
     rollout_params = {
         'exploit': False,

@@ -155,6 +155,10 @@ conda create -n opensim-rl -c kidzik -c conda-forge opensim python=3.6.1
 conda activate opensim-rl
 sudo apt install gfortran libblas-dev liblapack-dev libatlas-dev
 pip3 install rospkg
+pip install pyassimp
+pip3 install rotations
+pip3 install -U 'mujoco-py<2.2,>=2.1'
+sudo apt-get install patchelf
 source /opt/ros/kinetic/setup.bash
 mkdir -p ~/catkin_workspace/src
 cd ~/catkin_workspace/
@@ -206,6 +210,8 @@ pip3 install --upgrade pip
 ```
 sudo apt install libpython3.7-dev
 pip3 install mpi4py
+sudo apt-get install -y python3-mpi4py
+sudo apt-get install --reinstall openmpi-bin libopenmpi-dev
 ```
 - No need to install mujoco-py, since the code uses Rviz
 - GPU packages installation (Ubuntu 16.04) - https://towardsdatascience.com/deep-learning-gpu-installation-on-ubuntu-18-4-9b12230a1d31
@@ -213,12 +219,14 @@ pip3 install mpi4py
   - Use the link to find all the steps
   - Other link: https://medium.com/@kapilvarshney/how-to-setup-ubuntu-16-04-with-cuda-gpu-and-other-requirements-for-deep-learning-f547db75f227
   - Cuda download link: https://developer.nvidia.com/cuda-80-ga2-download-archive
+  - cuda v10.0
+  - cuDNN v7.6.5
 ```
 pip3 install xgboost
 sudo apt-get install python3-apt
 ```
 
-## How to run the program
+## How to run the DDPG+HER training
 
 
 **Before running roslaunch command, setup aubo robot repository with ros kinetic (link in pre requite section)**
@@ -244,7 +252,7 @@ python3 train.py
 ```
 The best policy will be generated in the directory `/tmp/newlog` (OR the log directory you specify).
 
-To begin training using the GA_her+ddpg parameters generated from the python script `ga.py`
+To begin training (command-line arguments can be passed to run train.py on specific parameter values)
 ```
 python3 train.py --polyak_value=0.924 --gamma_value=0.949 --q_learning=0.001 --pi_learning=0.001 --random_epsilon=0.584 --noise_epsilon=0.232
 ```
@@ -275,7 +283,7 @@ gedit demo.launch (or just manually open demo.launch in any text editory)
   </include> -->
 ```
 
-Gym Environments available for GA-DRL execution (can be changes in ga.py):
+## Gym Environments available for GA-DRL execution (can be changed in train.py):
 - AuboReach-v0 - executes joint states with moveit
 - AuboReach-v1 - only calculates actions but does not execute joint states (increased learning speed)
 - AuboReach-v2 - only calculates actions but does not execute joint states (increased learning speed), reward fixes to converge the learning curve
@@ -283,6 +291,8 @@ Gym Environments available for GA-DRL execution (can be changes in ga.py):
 - AuboReach-v4 - executes joint states with moveit, only run with first 4 joint states
 - AuboReach-v5 - executes joint states with moveit, only run with first 4 joint states, runs training and testing with random initial and target joint states, CPU = 1, denser rewards
 - FetchReacher-v1 - Door opening environment from the paper. Files used are fetch.py, reach.py, robot_env.py and aubo_i5.xml (this file has the configuration for DoorOpening env).
+
+
 
 ## How to train the environment manually
 ```
@@ -297,6 +307,33 @@ python3 play.py <file_path>
 python3 play.py /tmp/openaiGA/policy_best.pkl
 ```
 where file_path = /tmp/openaiGA/policy_best.pkl in our case.
+
+## How to train the environment on Multi-Actor/Critic + HER setup
+
+- New Configurations for ddpg_multi-actor-critic
+  - 'rl_algo' in config.py file 
+  - 'network_class' in config.py file
+  - 'number_actors' in train.py
+  - 'number_critics' in train.py
+
+- New files for ddpg_multi-actor-critic
+  - ddpg_multi_actor_critic.py
+  - multi_actor_critic.py
+
+- Some parameter values:
+  - Episodes = 100
+  - Cycles = 50
+
+## How to compare DDPG+HER with Multi Actor/Critic with HER
+- Run 20 times, and take average (20 independent trails)
+- Average Q values over epochs 
+  - also show scatter of values as background shadow
+- Cumulative rewards over epochs
+  - also show scatter of values as background shadow
+- Average rewards over epochs
+  - also show scatter of values as background shadow
+- Average training loss over epochs
+  - also show scatter of values as background shadow
 
 ## How to plot results:
 For one set of parameter values and for one DRL run, plot results using:

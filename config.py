@@ -4,6 +4,7 @@ import random
 
 import logger
 from ddpg import DDPG
+from ddpg_multi_actor_critic import DDPGMultiActorCritic
 from her import make_sample_her_transitions
 for env in gym.envs.registry.env_specs:
      if 'AuboReach-v2' in env:
@@ -14,19 +15,20 @@ from aubo_reach5_env import PickbotEnv
 from aubo_reach6_env import PickbotEnv
 from aubo_reach7_env import PickbotEnv
 from aubo_reach8_env import PickbotEnv
+from reach import FetchReachEnv
 DEFAULT_ENV_PARAMS = {
-    'AuboReach-v2': {
-        'n_cycles': 10,
-    },
-    'AuboReach-v3': {
-        'n_cycles': 10,
-    },
-    'AuboReach-v4': {
-        'n_cycles': 10,
-    },
-    'AuboReach-v5': {
-        'n_cycles': 10,
-    },
+    # 'AuboReach-v2': {
+    #     'n_cycles': 10,
+    # },
+    # 'AuboReach-v3': {
+    #     'n_cycles': 10,
+    # },
+    # 'AuboReach-v4': {
+    #     'n_cycles': 10,
+    # },
+    # 'AuboReach-v5': {
+    #     'n_cycles': 10,
+    # },
 }
 
 
@@ -36,7 +38,7 @@ DEFAULT_PARAMS = {
     # ddpg
     'layers': 3,  # number of layers in the critic/actor networks
     'hidden': 256,  # number of neurons in each hidden layers
-    'network_class': 'actor_critic:ActorCritic',
+    'network_class': 'multi_actor_critic:MultiActorCritic', # ddpg = 'actor_critic:ActorCritic', ddpg_multi_actor_critic = 'multi_actor_critic:MultiActorCritic'
     'Q_lr': 0.001,  # critic learning rate
     'pi_lr': 0.001,  # actor learning rate
     'buffer_size': int(1E6),  # for experience replay
@@ -62,7 +64,8 @@ DEFAULT_PARAMS = {
     # normalization
     'norm_eps': 0.01,  # epsilon used for observation normalization
     'norm_clip': 5,  # normalized observations are cropped to this values
-    'allow_soft_placement': True # to run the code on GPU
+    # 'allow_soft_placement': True # to run the code on GPU
+    'rl_algo': 'ddpg_multi_actor_critic' # ddpg or ddpg_multi_actor_critic
 
 }
 
@@ -174,6 +177,36 @@ def configure_ddpg(dims, params, reuse=False, use_mpi=True, clip_return=True):
         'env_name': params['env_name'],
     }
     policy = DDPG(reuse=reuse, **ddpg_params, use_mpi=use_mpi)
+    return policy
+
+
+def configure_ddpg_multi_actor_critic(dims, params, reuse=False, use_mpi=True, clip_return=True):
+    sample_her_transitions = configure_her(params)
+    # Extract relevant parameters.
+    gamma = params['gamma']
+    #polyak = params['polyak']
+    rollout_batch_size = params['rollout_batch_size']
+    ddpg_params = params['ddpg_params']
+
+    input_dims = dims.copy()
+
+    # DDPG agent
+    env = cached_make_env(params['make_env'])
+    env.reset()
+    ddpg_params.update({'input_dims': input_dims,  # agent takes an input observations
+                        'T': params['T'],
+                        'clip_pos_returns': True,  # clip positive returns
+                        'clip_return': (1. / (1. - gamma)) if clip_return else np.inf,  # max abs of return
+                        'rollout_batch_size': rollout_batch_size,
+                        'subtract_goals': simple_goal_subtract,
+                        'sample_transitions': sample_her_transitions,
+                        'gamma': gamma,
+                        #'polyak': polyak,
+                        })
+    ddpg_params['info'] = {
+        'env_name': params['env_name'],
+    }
+    policy = DDPGMultiActorCritic(reuse=reuse, **ddpg_params, use_mpi=use_mpi)
     return policy
 
 
