@@ -313,8 +313,10 @@ where file_path = /tmp/openaiGA/policy_best.pkl in our case.
 - New Configurations for ddpg_multi-actor-critic
   - 'rl_algo' in config.py file 
   - 'network_class' in config.py file
-  - 'number_actors' in train.py
-  - 'number_critics' in train.py
+  - 'number_actors_main' in train.py
+  - 'number_critics_main' in train.py
+  - 'number_actors_target' in train.py
+  - 'number_critics_target' in train.py
 
 - New files for ddpg_multi-actor-critic
   - ddpg_multi_actor_critic.py

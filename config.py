@@ -111,7 +111,8 @@ def prepare_params(kwargs):
                  'batch_size', 'Q_lr', 'pi_lr',
                  'norm_eps', 'norm_clip', 'max_u',
                  'action_l2', 'clip_obs', 'scope', 'relative_goals',
-                 'number_actors', 'number_critics']:
+                 'number_actors_main', 'number_critics_main',
+                 'number_actors_target', 'number_critics_target']:
         ddpg_params[name] = kwargs[name]
         kwargs['_' + name] = kwargs[name]
         del kwargs[name]

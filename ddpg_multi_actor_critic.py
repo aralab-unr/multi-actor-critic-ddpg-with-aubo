@@ -21,7 +21,8 @@ class DDPGMultiActorCritic(object):
     def __init__(self, input_dims, buffer_size, hidden, layers, network_class, polyak, batch_size,
                  Q_lr, pi_lr, norm_eps, norm_clip, max_u, action_l2, clip_obs, scope, T,
                  rollout_batch_size, subtract_goals, relative_goals, clip_pos_returns, clip_return,
-                 sample_transitions, gamma, reuse=True, **kwargs):
+                 sample_transitions, gamma, reuse=True, number_actors_main=1, number_critics_main=1,
+                 number_actors_target=1, number_critics_target=1, **kwargs):
         """Implementation of DDPG that is used in combination with Hindsight Experience Replay (HER).
         Args:
             input_dims (dict of ints): dimensions for the observation (o), the goal (g), and the
@@ -49,6 +50,10 @@ class DDPGMultiActorCritic(object):
             sample_transitions (function) function that samples from the replay buffer
             gamma (float): gamma used for Q learning updates
             reuse (boolean): whether or not the networks should be reused
+            number_actors_main (int): number of actors to to used in main network
+            number_critics_main (int): number of critics to to used in main network
+            number_actors_target (int): number of actors to to used in target network
+            number_critics_target (int): number of critics to to used in target network
         """
         if self.clip_return is None:
             self.clip_return = np.inf
@@ -225,7 +230,7 @@ class DDPGMultiActorCritic(object):
         return res
 
     def _create_network(self, reuse=False):
-        logger.info("Creating a DDPG agent with action space %d x %s..." % (self.dimu, self.max_u))
+        logger.info("Creating a DDPGMultiActorCritic agent with action space %d x %s..." % (self.dimu, self.max_u))
 
         self.sess = tf.get_default_session()
         if self.sess is None:
@@ -251,7 +256,7 @@ class DDPGMultiActorCritic(object):
         with tf.variable_scope('main') as vs:
             if reuse:
                 vs.reuse_variables()
-            self.main = self.create_actor_critic(batch_tf, net_type='main', **self.__dict__)
+            self.main = self.create_actor_critic(batch_tf, self.number_actors_main, self.number_critics_main, net_type='main', **self.__dict__)
             vs.reuse_variables()
         with tf.variable_scope('target') as vs:
             if reuse:
@@ -260,7 +265,7 @@ class DDPGMultiActorCritic(object):
             target_batch_tf['o'] = batch_tf['o_2']
             target_batch_tf['g'] = batch_tf['g_2']
             self.target = self.create_actor_critic(
-                target_batch_tf, net_type='target', **self.__dict__)
+                target_batch_tf, self.number_actors_target, self.number_critics_target, net_type='target', **self.__dict__)
             vs.reuse_variables()
         assert len(self._vars("main")) == len(self._vars("target"))
 

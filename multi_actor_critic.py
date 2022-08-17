@@ -4,12 +4,14 @@ from util import store_args, nn
 
 class MultiActorCritic:
     @store_args
-    def __init__(self, inputs_tf, dimo, dimg, dimu, max_u, o_stats, g_stats, hidden, layers,
+    def __init__(self, inputs_tf, number_actors, number_critics, dimo, dimg, dimu, max_u, o_stats, g_stats, hidden, layers,
                  **kwargs):
         """The actor-critic network and related training code.
         Args:
             inputs_tf (dict of tensors): all necessary inputs for the network: the
                 observation (o), the goal (g), and the action (u)
+            number_actors (int): number of actors to to used
+            number_critics (int): number of critics to to used
             dimo (int): the dimension of the observations
             dimg (int): the dimension of the goals
             dimu (int): the dimension of the actions
