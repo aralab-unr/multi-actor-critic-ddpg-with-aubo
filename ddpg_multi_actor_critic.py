@@ -2,6 +2,7 @@ from collections import OrderedDict
 
 import numpy as np
 import tensorflow as tf
+import torch
 from tensorflow.contrib.staging import StagingArea
 
 import logger
@@ -22,7 +23,7 @@ class DDPGMultiActorCritic(object):
                  Q_lr, pi_lr, norm_eps, norm_clip, max_u, action_l2, clip_obs, scope, T,
                  rollout_batch_size, subtract_goals, relative_goals, clip_pos_returns, clip_return,
                  sample_transitions, gamma, reuse=True, number_actors_main=1, number_critics_main=1,
-                 number_actors_target=1, number_critics_target=1, **kwargs):
+                 number_actors_target=1, number_critics_target=1, central_tendency='mean', **kwargs):
         """Implementation of DDPG that is used in combination with Hindsight Experience Replay (HER).
         Args:
             input_dims (dict of ints): dimensions for the observation (o), the goal (g), and the
@@ -50,15 +51,16 @@ class DDPGMultiActorCritic(object):
             sample_transitions (function) function that samples from the replay buffer
             gamma (float): gamma used for Q learning updates
             reuse (boolean): whether or not the networks should be reused
-            number_actors_main (int): number of actors to to used in main network
-            number_critics_main (int): number of critics to to used in main network
-            number_actors_target (int): number of actors to to used in target network
-            number_critics_target (int): number of critics to to used in target network
+            number_actors_main (int): number of actors to be used in main network
+            number_critics_main (int): number of critics to be used in main network
+            number_actors_target (int): number of actors to be used in target network
+            number_critics_target (int): number of critics to be used in target network
         """
         if self.clip_return is None:
             self.clip_return = np.inf
 
         self.create_actor_critic = import_function(self.network_class)
+        self.create_single_actor_critic = import_function('actor_critic:ActorCritic')
 
         input_shapes = dims_to_shapes(self.input_dims)
         self.dimo = self.input_dims['o']
@@ -246,7 +248,7 @@ class DDPGMultiActorCritic(object):
                 vs.reuse_variables()
             self.g_stats = Normalizer(self.dimg, self.norm_eps, self.norm_clip, sess=self.sess)
 
-        # mini-batch sampling.
+        # mini-batch sampling
         batch = self.staging_tf.get()
         batch_tf = OrderedDict([(key, batch[i])
                                 for i, key in enumerate(self.stage_shapes.keys())])
@@ -270,10 +272,27 @@ class DDPGMultiActorCritic(object):
         assert len(self._vars("main")) == len(self._vars("target"))
 
         # loss functions
-        target_Q_pi_tf = self.target.Q_pi_tf
+        # target_Q_pi_tf = self.target.Q_pi_tf
+        target_Q_pi_tf_array = self.target.Q_pi_tf_array
         clip_range = (-self.clip_return, 0. if self.clip_pos_returns else np.inf)
-        target_tf = tf.clip_by_value(batch_tf['r'] + self.gamma * target_Q_pi_tf, *clip_range)
-        self.Q_loss_tf = tf.reduce_mean(tf.square(tf.stop_gradient(target_tf) - self.main.Q_tf))
+        # target_tf = tf.clip_by_value(batch_tf['r'] + self.gamma * target_Q_pi_tf, *clip_range)
+        # Take average of actor networks
+        target_Q_pi_tf_avg = target_Q_pi_tf_array[0]
+        for i in range (1, len(target_Q_pi_tf_array)):
+            target_Q_pi_tf_avg = target_Q_pi_tf_avg + target_Q_pi_tf_array[i]
+        target_Q_pi_tf_avg = target_Q_pi_tf_avg/len(target_Q_pi_tf_array)
+        if self.central_tendency == 'mean':
+            target_tf = tf.clip_by_value(batch_tf['r'] + self.gamma * target_Q_pi_tf_avg, *clip_range)
+        else:  # TODO: other means of central tendency to be implemented yet
+            target_tf = tf.clip_by_value(batch_tf['r'] + self.gamma * target_Q_pi_tf, *clip_range)
+
+        # self.Q_loss_tf = tf.reduce_mean(tf.square(tf.stop_gradient(target_tf) - self.main.Q_tf))
+        main_Q_tf_avg = self.main.Q_tf_array[0]
+        for i in range(1, len(target_Q_pi_tf_array)):
+            main_Q_tf_avg = main_Q_tf_avg + Q_tf_array[i]
+        main_Q_tf_avg = target_Q_pi_tf_avg / len(target_Q_pi_tf_array)
+        self.Q_loss_tf = tf.reduce_mean(tf.square(tf.stop_gradient(target_tf) - main_Q_tf_avg))
+
         self.pi_loss_tf = -tf.reduce_mean(self.main.Q_pi_tf)
         self.pi_loss_tf += self.action_l2 * tf.reduce_mean(tf.square(self.main.pi_tf / self.max_u))
         Q_grads_tf = tf.gradients(self.Q_loss_tf, self._vars('main/Q'))

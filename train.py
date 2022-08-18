@@ -160,7 +160,7 @@ def train(policy, rollout_worker, evaluator,
 
 def launch(
     env, logdir, n_epochs, num_cpu, seed, replay_strategy, policy_save_interval, clip_return, polyak_value, gamma_value, q_learning, pi_learning, random_epsilon, noise_epsilon,
-        number_actors_main, number_critics_main, number_actors_target, number_critics_target, override_params={}, save_policies=True,
+        number_actors_main, number_critics_main, number_actors_target, number_critics_target, central_tendency, override_params={}, save_policies=True,
 ):
     # Fork for multi-CPU MPI implementation.
     if num_cpu > 1:
@@ -206,6 +206,7 @@ def launch(
     params['number_critics_main'] = number_critics_main
     params['number_actors_target'] = number_actors_target
     params['number_critics_target'] = number_critics_target
+    params['central_tendency'] = central_tendency
     if env in config.DEFAULT_ENV_PARAMS:
         params.update(config.DEFAULT_ENV_PARAMS[env])  # merge env-specific parameters in
     params.update(**override_params)  # makes it possible to override any parameter
@@ -285,10 +286,11 @@ def launch(
 @click.option('--pi_learning', type=float, default=0.001, help='actor learning rate')
 @click.option('--random_epsilon', type=float, default=0.3, help='percentage of time a random action is taken')
 @click.option('--noise_epsilon', type=float, default=0.2, help='std of gaussian noise added to not-completely-random actions as a percentage of max_u')
-@click.option('--number_actors_main', type=int, default=1, help='number of actors to to used in main network')
-@click.option('--number_critics_main', type=int, default=1, help='number of critics to to used in main network')
-@click.option('--number_actors_target', type=int, default=1, help='number of actors to to used in target network')
-@click.option('--number_critics_target', type=int, default=1, help='number of critics to to used in target network')
+@click.option('--number_actors_main', type=int, default=2, help='number of actors to to used in main network')
+@click.option('--number_critics_main', type=int, default=2, help='number of critics to be used in main network')
+@click.option('--number_actors_target', type=int, default=2, help='number of actors to be used in target network')
+@click.option('--number_critics_target', type=int, default=2, help='number of critics to to used in target network')
+@click.option('--central_tendency', type=str, default='mean', help='used to decide which measure of central tendency to be used: mean, median, mode etc.')
 def main(**kwargs):
     launch(**kwargs)
 

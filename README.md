@@ -159,6 +159,7 @@ pip install pyassimp
 pip3 install rotations
 pip3 install -U 'mujoco-py<2.2,>=2.1'
 sudo apt-get install patchelf
+pip3 install torch==1.1.0 # torch-1.1.0
 source /opt/ros/kinetic/setup.bash
 mkdir -p ~/catkin_workspace/src
 cd ~/catkin_workspace/
@@ -317,6 +318,8 @@ where file_path = /tmp/openaiGA/policy_best.pkl in our case.
   - 'number_critics_main' in train.py
   - 'number_actors_target' in train.py
   - 'number_critics_target' in train.py
+  - 'number_critics_target' in train.py # used to decide which measure of central tendency to be used (only mean implemented)
+  - 
 
 - New files for ddpg_multi-actor-critic
   - ddpg_multi_actor_critic.py
@@ -325,6 +328,13 @@ where file_path = /tmp/openaiGA/policy_best.pkl in our case.
 - Some parameter values:
   - Episodes = 100
   - Cycles = 50
+
+- Average is taken for both actor and critic
+  - network weights are averaged to single actor/critic
+
+- Each actor does not reuse (My solution has reuse false for all actors)
+- critic network has reuse = true (My solution has reuse false for all critics)
+- How to maintain network name after taking average of networks
 
 ## How to compare DDPG+HER with Multi Actor/Critic with HER
 - Run 20 times, and take average (20 independent trails)
@@ -336,6 +346,8 @@ where file_path = /tmp/openaiGA/policy_best.pkl in our case.
   - also show scatter of values as background shadow
 - Average training loss over epochs
   - also show scatter of values as background shadow
+- Try Loss as mean, median, mode etc from all networks in both actors and critics
+- Try different number of actors/critics in main/target networks
 
 ## How to plot results:
 For one set of parameter values and for one DRL run, plot results using:
