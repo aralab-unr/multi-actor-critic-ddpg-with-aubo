@@ -33,16 +33,26 @@ class MultiActorCritic:
         input_pi = tf.concat(axis=1, values=[o, g])  # for actor
 
         # Networks.
+        # actors
         with tf.variable_scope('pi'):
-            self.pi_tf = self.max_u * tf.tanh(nn(
-                input_pi, [self.hidden] * self.layers + [self.dimu]))
+            # self.pi_tf = self.max_u * tf.tanh(nn(
+            #     input_pi, [self.hidden] * self.layers + [self.dimu]))
+            self.pi_tf_array = [] # creating array of networks for actors
+            for i in range(0, number_actors):
+                self.pi_tf_array.append(self.max_u * tf.tanh(nn(input_pi, [self.hidden] * self.layers + [self.dimu], reuse=None, flatten=False, name=str('actor_'+str(i)))))
+        # critics
         with tf.variable_scope('Q'):
             # for policy training
-            input_Q = tf.concat(axis=1, values=[o, g, self.pi_tf / self.max_u])
+            self.pi_tf_avg = self.pi_tf_array[0]
+            for i in range(1, len(self.pi_tf_array)):
+                self.pi_tf_avg = self.pi_tf_avg + self.pi_tf_array[i]
+            self.pi_tf_avg = self.pi_tf_avg / len(self.pi_tf_array)
+            # input_Q = tf.concat(axis=1, values=[o, g, self.pi_tf / self.max_u])
+            input_Q = tf.concat(axis=1, values=[o, g, self.pi_tf_avg / self.max_u])
             # self.Q_pi_tf = nn(input_Q, [self.hidden] * self.layers + [1])
-            self.Q_pi_tf_array = [] # creating array of networks for actors
-            for i in range(0, number_actors):
-                self.Q_pi_tf_array.append(nn(input_Q, [self.hidden] * self.layers + [1], None, False, str(self.net_type+'_actor_'+str(i)))) # 256 * 3
+            self.Q_pi_tf_array = [] # creating array of networks for policy
+            for i in range(0, number_critics):
+                self.Q_pi_tf_array.append(nn(input_Q, [self.hidden] * self.layers + [1], None, False, str('critic_'+str(i)))) # 256 * 3
             self.Q_pi_tf_array = np.array(self.Q_pi_tf_array)
 
             # for critic training
@@ -51,5 +61,5 @@ class MultiActorCritic:
             # self.Q_tf = nn(input_Q, [self.hidden] * self.layers + [1], reuse=True)
             self.Q_tf_array = []  # creating array of networks for critics
             for i in range(0, number_critics):
-                self.Q_tf_array.append(nn(input_Q, [self.hidden] * self.layers + [1], reuse=None, flatten=False, name=str(self.net_type+'_critic_'+str(i))))
+                self.Q_tf_array.append(nn(input_Q, [self.hidden] * self.layers + [1], reuse=True, flatten=False, name=str('critic_'+str(i))))
             self.Q_tf_array = np.array(self.Q_tf_array)

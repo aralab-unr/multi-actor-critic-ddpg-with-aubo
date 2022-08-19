@@ -288,13 +288,27 @@ class DDPGMultiActorCritic(object):
 
         # self.Q_loss_tf = tf.reduce_mean(tf.square(tf.stop_gradient(target_tf) - self.main.Q_tf))
         main_Q_tf_avg = self.main.Q_tf_array[0]
-        for i in range(1, len(target_Q_pi_tf_array)):
-            main_Q_tf_avg = main_Q_tf_avg + Q_tf_array[i]
-        main_Q_tf_avg = target_Q_pi_tf_avg / len(target_Q_pi_tf_array)
+        for i in range(1, len(self.main.Q_tf_array)):
+            main_Q_tf_avg = main_Q_tf_avg + self.main.Q_tf_array[i]
+        main_Q_tf_avg = main_Q_tf_avg / len(self.main.Q_tf_array)
         self.Q_loss_tf = tf.reduce_mean(tf.square(tf.stop_gradient(target_tf) - main_Q_tf_avg))
 
-        self.pi_loss_tf = -tf.reduce_mean(self.main.Q_pi_tf)
-        self.pi_loss_tf += self.action_l2 * tf.reduce_mean(tf.square(self.main.pi_tf / self.max_u))
+        # self.pi_loss_tf = -tf.reduce_mean(self.main.Q_pi_tf)
+        main_Q_pi_tf_avg = self.main.Q_pi_tf_array[0]
+        for i in range(1, len(self.main.Q_pi_tf_array)):
+            main_Q_pi_tf_avg = main_Q_pi_tf_avg + self.main.Q_pi_tf_array[i]
+        main_Q_pi_tf_avg = main_Q_pi_tf_avg / len(self.main.Q_pi_tf_array)
+        self.pi_loss_tf = -tf.reduce_mean(main_Q_pi_tf_avg)
+
+
+        # self.pi_loss_tf += self.action_l2 * tf.reduce_mean(tf.square(self.main.pi_tf / self.max_u))
+        main_pi_tf_avg = self.main.pi_tf_array[0]
+        for i in range(1, len(self.main.pi_tf_array)):
+            main_pi_tf_avg = main_pi_tf_avg + self.main.pi_tf_array[i]
+        main_pi_tf_avg = main_pi_tf_avg / len(self.main.pi_tf_array)
+        self.pi_loss_tf = -tf.reduce_mean(main_Q_pi_tf_avg)
+        self.pi_loss_tf += self.action_l2 * tf.reduce_mean(tf.square(main_pi_tf_avg / self.max_u))
+
         Q_grads_tf = tf.gradients(self.Q_loss_tf, self._vars('main/Q'))
         pi_grads_tf = tf.gradients(self.pi_loss_tf, self._vars('main/pi'))
         assert len(self._vars('main/Q')) == len(Q_grads_tf)

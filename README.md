@@ -333,8 +333,9 @@ where file_path = /tmp/openaiGA/policy_best.pkl in our case.
   - network weights are averaged to single actor/critic
 
 - Each actor does not reuse (My solution has reuse false for all actors)
-- critic network has reuse = true (My solution has reuse false for all critics)
+- critic network has reuse = true (My solution has reuse false for all critics) # reverted
 - How to maintain network name after taking average of networks
+- Q_grads_tf and pi_grads_tf network names in ddpg_multi_actor_critic.py?
 
 ## How to compare DDPG+HER with Multi Actor/Critic with HER
 - Run 20 times, and take average (20 independent trails)
