@@ -157,6 +157,9 @@ sudo apt install gfortran libblas-dev liblapack-dev libatlas-dev
 pip3 install rospkg
 pip install pyassimp
 pip3 install rotations
+pip install matplotlib
+pip install seaborn
+pip install glob2
 pip3 install -U 'mujoco-py<2.2,>=2.1'
 sudo apt-get install patchelf
 pip3 install torch==1.1.0 # torch-1.1.0
@@ -357,6 +360,8 @@ where file_path = /tmp/openaiGA/policy_best.pkl in our case.
 - Try with Aubo env-6, where robot actually moves to learn the task
 - Try on door opening environment
 - Try other openai baselines envs to run the code
+- Changed n_cycles from 50 to 15
+- Changed n_batches from 40 to 15
 
 ## How to plot results:
 For one set of parameter values and for one DRL run, plot results using:

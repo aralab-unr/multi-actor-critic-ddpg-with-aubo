@@ -15,6 +15,7 @@ from aubo_reach5_env import PickbotEnv
 from aubo_reach6_env import PickbotEnv
 from aubo_reach7_env import PickbotEnv
 from aubo_reach8_env import PickbotEnv
+from aubo_reach9_env import PickbotEnv
 from reach import FetchReachEnv
 DEFAULT_ENV_PARAMS = {
     # 'AuboReach-v2': {
@@ -48,9 +49,9 @@ DEFAULT_PARAMS = {
     'scope': 'ddpg',  # can be tweaked for testing
     'relative_goals': False,
     # training
-    'n_cycles': 50,  # per epoch
+    'n_cycles': 15, #50 # per epoch
     'rollout_batch_size': 2,  # per mpi thread
-    'n_batches': 40,  # training batches per cycle
+    'n_batches': 15, #40 # training batches per cycle
     'batch_size': 256,  # per mpi thread, measured in transitions and reduced to even multiple of chunk_length.
     'n_test_rollouts': 10,  # number of test rollouts per epoch, each consists of rollout_batch_size rollouts
     'test_with_polyak': False,  # run test episodes with the target network

@@ -1,0 +1,295 @@
+Logging to ~/multi-ac-logs
+T: 50
+_Q_lr: 0.001
+_action_l2: 1.0
+_batch_size: 256
+_buffer_size: 1000000
+_clip_obs: 200.0
+_hidden: 256
+_layers: 3
+_max_u: 1.7
+_network_class: actor_critic:ActorCritic
+_norm_clip: 5
+_norm_eps: 0.01
+_number_actors_main: 1
+_number_actors_target: 1
+_number_critics_main: 2
+_number_critics_target: 2
+_pi_lr: 0.001
+_polyak: 0.95
+_relative_goals: False
+_scope: ddpg
+central_tendency: mean
+ddpg_params: {'buffer_size': 1000000, 'hidden': 256, 'layers': 3, 'network_class': 'actor_critic:ActorCritic', 'polyak': 0.95, 'batch_size': 256, 'Q_lr': 0.001, 'pi_lr': 0.001, 'norm_eps': 0.01, 'norm_clip': 5, 'max_u': 1.7, 'action_l2': 1.0, 'clip_obs': 200.0, 'scope': 'ddpg', 'relative_goals': False, 'number_actors_main': 1, 'number_critics_main': 2, 'number_actors_target': 1, 'number_critics_target': 2}
+env_name: AuboReach-v5
+gamma: 0.98
+make_env: <function prepare_params.<locals>.make_env at 0x7fc2d030f950>
+n_batches: 15
+n_cycles: 15
+n_test_rollouts: 10
+noise_eps: 0.2
+random_eps: 0.3
+replay_k: 4
+replay_strategy: future
+rl_algo: ddpg
+rollout_batch_size: 2
+test_with_polyak: False
+Creating a DDPG agent with action space 4 x 1.7...
+Training...
+--------------------------------------------
+| epoch              | 0                   |
+| stats_g/mean       | -0.07134718         |
+| stats_g/std        | 0.92336935          |
+| stats_o/mean       | -0.044037253        |
+| stats_o/std        | 1.0676069           |
+| test/episode       | 20.0                |
+| test/mean_Q        | -2.7781699          |
+| test/reward        | -214.41250580885608 |
+| test/steps         | 1000.0              |
+| test/success_rate  | 0.0                 |
+| train/episode      | 30.0                |
+| train/reward       | -207.54930016921426 |
+| train/steps        | 1500.0              |
+| train/success_rate | 0.0                 |
+--------------------------------------------
+New best success rate: 0.0. Saving policy to ~/multi-ac-logs/policy_best.pkl ...
+Saving periodic policy to ~/multi-ac-logs/policy_0.pkl ...
+--------------------------------------------
+| epoch              | 1                   |
+| stats_g/mean       | -0.03987767         |
+| stats_g/std        | 0.89391345          |
+| stats_o/mean       | -0.01603218         |
+| stats_o/std        | 1.037343            |
+| test/episode       | 40.0                |
+| test/mean_Q        | -3.7350438          |
+| test/reward        | -174.01317832080227 |
+| test/steps         | 2000.0              |
+| test/success_rate  | 0.0                 |
+| train/episode      | 60.0                |
+| train/reward       | -188.06592675583087 |
+| train/steps        | 3000.0              |
+| train/success_rate | 0.0                 |
+--------------------------------------------
+New best success rate: 0.0. Saving policy to ~/multi-ac-logs/policy_best.pkl ...
+---------------------------------------------
+| epoch              | 2                    |
+| stats_g/mean       | -0.015784685         |
+| stats_g/std        | 0.87318754           |
+| stats_o/mean       | -0.018214926         |
+| stats_o/std        | 1.0129441            |
+| test/episode       | 60.0                 |
+| test/mean_Q        | -4.3296905           |
+| test/reward        | -180.4415035173291   |
+| test/steps         | 3000.0               |
+| test/success_rate  | 0.008333333333333333 |
+| train/episode      | 90.0                 |
+| train/reward       | -205.85508489277854  |
+| train/steps        | 4500.0               |
+| train/success_rate | 0.0                  |
+---------------------------------------------
+New best success rate: 0.008333333333333333. Saving policy to ~/multi-ac-logs/policy_best.pkl ...
+---------------------------------------------
+| epoch              | 3                    |
+| stats_g/mean       | -0.009653669         |
+| stats_g/std        | 0.8657983            |
+| stats_o/mean       | -0.017595861         |
+| stats_o/std        | 0.9933041            |
+| test/episode       | 80.0                 |
+| test/mean_Q        | -4.136119            |
+| test/reward        | -139.18847513469103  |
+| test/steps         | 4000.0               |
+| test/success_rate  | 0.125                |
+| train/episode      | 120.0                |
+| train/reward       | -144.14968600241642  |
+| train/steps        | 6000.0               |
+| train/success_rate | 0.005555555555555556 |
+---------------------------------------------
+New best success rate: 0.125. Saving policy to ~/multi-ac-logs/policy_best.pkl ...
+---------------------------------------------
+| epoch              | 4                    |
+| stats_g/mean       | -0.01225792          |
+| stats_g/std        | 0.8522194            |
+| stats_o/mean       | -0.009324217         |
+| stats_o/std        | 0.9720339            |
+| test/episode       | 100.0                |
+| test/mean_Q        | -4.7464414           |
+| test/reward        | -127.59930300306901  |
+| test/steps         | 5000.0               |
+| test/success_rate  | 0.375                |
+| train/episode      | 150.0                |
+| train/reward       | -145.86646132493783  |
+| train/steps        | 7500.0               |
+| train/success_rate | 0.016666666666666666 |
+---------------------------------------------
+New best success rate: 0.375. Saving policy to ~/multi-ac-logs/policy_best.pkl ...
+--------------------------------------------
+| epoch              | 5                   |
+| stats_g/mean       | -0.00891489         |
+| stats_g/std        | 0.84935504          |
+| stats_o/mean       | -0.0019325648       |
+| stats_o/std        | 0.9585213           |
+| test/episode       | 120.0               |
+| test/mean_Q        | -4.710714           |
+| test/reward        | -133.65897175820928 |
+| test/steps         | 6000.0              |
+| test/success_rate  | 0.5916666666666667  |
+| train/episode      | 180.0               |
+| train/reward       | -127.6864552933473  |
+| train/steps        | 9000.0              |
+| train/success_rate | 0.03888888888888889 |
+--------------------------------------------
+New best success rate: 0.5916666666666667. Saving policy to ~/multi-ac-logs/policy_best.pkl ...
+Saving periodic policy to ~/multi-ac-logs/policy_5.pkl ...
+--------------------------------------------
+| epoch              | 6                   |
+| stats_g/mean       | -0.0037811075       |
+| stats_g/std        | 0.8471648           |
+| stats_o/mean       | -0.002236208        |
+| stats_o/std        | 0.94449025          |
+| test/episode       | 140.0               |
+| test/mean_Q        | -4.2601075          |
+| test/reward        | -111.89804733277104 |
+| test/steps         | 7000.0              |
+| test/success_rate  | 0.8916666666666667  |
+| train/episode      | 210.0               |
+| train/reward       | -151.893153602325   |
+| train/steps        | 10500.0             |
+| train/success_rate | 0.12222222222222223 |
+--------------------------------------------
+New best success rate: 0.8916666666666667. Saving policy to ~/multi-ac-logs/policy_best.pkl ...
+--------------------------------------------
+| epoch              | 7                   |
+| stats_g/mean       | -0.0050897663       |
+| stats_g/std        | 0.8472031           |
+| stats_o/mean       | -0.0005380886       |
+| stats_o/std        | 0.93346137          |
+| test/episode       | 160.0               |
+| test/mean_Q        | -4.6169925          |
+| test/reward        | -98.51187196103275  |
+| test/steps         | 8000.0              |
+| test/success_rate  | 0.9166666666666666  |
+| train/episode      | 240.0               |
+| train/reward       | -99.48704144834564  |
+| train/steps        | 12000.0             |
+| train/success_rate | 0.16666666666666666 |
+--------------------------------------------
+New best success rate: 0.9166666666666666. Saving policy to ~/multi-ac-logs/policy_best.pkl ...
+--------------------------------------------
+| epoch              | 8                   |
+| stats_g/mean       | -0.0012696779       |
+| stats_g/std        | 0.84959334          |
+| stats_o/mean       | -0.003164919        |
+| stats_o/std        | 0.92168665          |
+| test/episode       | 180.0               |
+| test/mean_Q        | -4.7901936          |
+| test/reward        | -83.98201227457743  |
+| test/steps         | 9000.0              |
+| test/success_rate  | 0.9583333333333334  |
+| train/episode      | 270.0               |
+| train/reward       | -115.58361881044131 |
+| train/steps        | 13500.0             |
+| train/success_rate | 0.27777777777777773 |
+--------------------------------------------
+New best success rate: 0.9583333333333334. Saving policy to ~/multi-ac-logs/policy_best.pkl ...
+-------------------------------------------
+| epoch              | 9                  |
+| stats_g/mean       | -0.006438777       |
+| stats_g/std        | 0.85123426         |
+| stats_o/mean       | -0.0055491854      |
+| stats_o/std        | 0.9111083          |
+| test/episode       | 200.0              |
+| test/mean_Q        | -5.337324          |
+| test/reward        | -90.54154067005886 |
+| test/steps         | 10000.0            |
+| test/success_rate  | 1.0                |
+| train/episode      | 300.0              |
+| train/reward       | -125.7628492674224 |
+| train/steps        | 15000.0            |
+| train/success_rate | 0.3444444444444444 |
+-------------------------------------------
+New best success rate: 1.0. Saving policy to ~/multi-ac-logs/policy_best.pkl ...
+--------------------------------------------
+| epoch              | 10                  |
+| stats_g/mean       | -0.0036005834       |
+| stats_g/std        | 0.8533713           |
+| stats_o/mean       | -0.0057638492       |
+| stats_o/std        | 0.9023507           |
+| test/episode       | 220.0               |
+| test/mean_Q        | -4.9454365          |
+| test/reward        | -66.67727815372334  |
+| test/steps         | 11000.0             |
+| test/success_rate  | 0.9833333333333334  |
+| train/episode      | 330.0               |
+| train/reward       | -85.7429200431165   |
+| train/steps        | 16500.0             |
+| train/success_rate | 0.36666666666666664 |
+--------------------------------------------
+Saving periodic policy to ~/multi-ac-logs/policy_10.pkl ...
+--------------------------------------------
+| epoch              | 11                  |
+| stats_g/mean       | -0.0049233474       |
+| stats_g/std        | 0.85485107          |
+| stats_o/mean       | -0.0017520924       |
+| stats_o/std        | 0.89273787          |
+| test/episode       | 240.0               |
+| test/mean_Q        | -4.6508193          |
+| test/reward        | -76.44887315001215  |
+| test/steps         | 12000.0             |
+| test/success_rate  | 1.0                 |
+| train/episode      | 360.0               |
+| train/reward       | -107.82824626996155 |
+| train/steps        | 18000.0             |
+| train/success_rate | 0.4222222222222222  |
+--------------------------------------------
+New best success rate: 1.0. Saving policy to ~/multi-ac-logs/policy_best.pkl ...
+--------------------------------------------
+| epoch              | 12                  |
+| stats_g/mean       | 0.0005824091        |
+| stats_g/std        | 0.8576639           |
+| stats_o/mean       | 0.00045108702       |
+| stats_o/std        | 0.8856651           |
+| test/episode       | 260.0               |
+| test/mean_Q        | -5.288542           |
+| test/reward        | -82.40058585220017  |
+| test/steps         | 13000.0             |
+| test/success_rate  | 1.0                 |
+| train/episode      | 390.0               |
+| train/reward       | -121.27966175683967 |
+| train/steps        | 19500.0             |
+| train/success_rate | 0.3499999999999999  |
+--------------------------------------------
+New best success rate: 1.0. Saving policy to ~/multi-ac-logs/policy_best.pkl ...
+--------------------------------------------
+| epoch              | 13                  |
+| stats_g/mean       | 0.00039538555       |
+| stats_g/std        | 0.858985            |
+| stats_o/mean       | -0.0014331477       |
+| stats_o/std        | 0.87877035          |
+| test/episode       | 280.0               |
+| test/mean_Q        | -4.729119           |
+| test/reward        | -62.39240471428662  |
+| test/steps         | 14000.0             |
+| test/success_rate  | 1.0                 |
+| train/episode      | 420.0               |
+| train/reward       | -93.15181382423214  |
+| train/steps        | 21000.0             |
+| train/success_rate | 0.41111111111111115 |
+--------------------------------------------
+New best success rate: 1.0. Saving policy to ~/multi-ac-logs/policy_best.pkl ...
+-------------------------------------------
+| epoch              | 14                 |
+| stats_g/mean       | -0.0026493275      |
+| stats_g/std        | 0.861911           |
+| stats_o/mean       | -0.00083905965     |
+| stats_o/std        | 0.87417597         |
+| test/episode       | 300.0              |
+| test/mean_Q        | -5.113543          |
+| test/reward        | -61.24496119531225 |
+| test/steps         | 15000.0            |
+| test/success_rate  | 1.0                |
+| train/episode      | 450.0              |
+| train/reward       | -88.74210324945943 |
+| train/steps        | 22500.0            |
+| train/success_rate | 0.4222222222222222 |
+-------------------------------------------
+New best success rate: 1.0. Saving policy to ~/multi-ac-logs/policy_best.pkl ...
