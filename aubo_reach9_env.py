@@ -95,12 +95,12 @@ class PickbotEnv(gym.GoalEnv):
         self.added_reward = 0
         self.seed()
         self.rewardThreshold = 0.80
-        self.new_action = [0., 0., 0., 0.]
+        self.new_action = [0., 0., 0., 0., 0., 0.]
         # self.init_pos = np.array([.3,0.7,-0.2,1.3])
-        self.init_pos = np.array([-1.3, 0.4, 1.2, -1.0])
-        self.action_shape = 4
-        self.action_space = spaces.Box(-1., 1., shape=(4,), dtype="float32")
-        self.goal = np.array([0.612, 1.3566, -1.234, 0.4995])
+        self.init_pos = np.array([-1.3, 0.4, 1.2, -1.0, -1.0, -1.0])
+        self.action_shape = 6
+        self.action_space = spaces.Box(-1., 1., shape=(6,), dtype="float32")
+        self.goal = np.array([-0.503, 0.605, -1.676, -1.597, -1.527, -0.036])
 
         self.check_joint_states()
         obs = self.get_obs()
@@ -190,7 +190,7 @@ class PickbotEnv(gym.GoalEnv):
         9) Return State
         """
         self.random_init_joints()
-        self.publisher_to_moveit_object.set_joints(init_joint_pos)
+        self.publisher_to_moveit_object.set_joints(self.init_pos)
 
         # print(">>>>>>>>>>>>>>>>>>> RESET: waiting for the movement to complete")
         # rospy.wait_for_message("/pickbot/movement_complete", Bool)
@@ -212,7 +212,7 @@ class PickbotEnv(gym.GoalEnv):
             #     return U.get_state(observation), reward, True, {}
 
             elapsed_time = rospy.Time.now() - start_ros_time
-            if np.isclose(init_joint_pos, self.joints_state.position, rtol=0.0, atol=0.01).all():
+            if np.isclose(self.init_pos, self.joints_state.position, rtol=0.0, atol=0.01).all():
                 break
             elif elapsed_time > rospy.Duration(2):  # time out
                 break
@@ -379,8 +379,8 @@ class PickbotEnv(gym.GoalEnv):
         foreArm_joint_state = joint_states.position[1]
         upperArm_joint_state = joint_states.position[2]
         wrist1_joint_state = joint_states.position[3]
-        # wrist2_joint_state = joint_states.position[4]
-        # wrist3_joint_state = joint_states.position[5]
+        wrist2_joint_state = joint_states.position[4]
+        wrist3_joint_state = joint_states.position[5]
 
         for joint in joint_states.position:
             if joint > 2 * math.pi or joint < -2 * math.pi:
@@ -388,11 +388,9 @@ class PickbotEnv(gym.GoalEnv):
                 print(np.around(joint_states.position, decimals=3))
                 sys.exit("Joint exceeds limit")
 
-        # self.curr_joint = np.array(
-        #     [shoulder_joint_state, foreArm_joint_state, upperArm_joint_state, wrist1_joint_state, wrist2_joint_state,
-        #      wrist3_joint_state])
         self.curr_joint = np.array(
-            [shoulder_joint_state, foreArm_joint_state, upperArm_joint_state, wrist1_joint_state])
+            [shoulder_joint_state, foreArm_joint_state, upperArm_joint_state, wrist1_joint_state, wrist2_joint_state,
+             wrist3_joint_state])
         object = self.goal
         # rel_pos = self.get_distance_gripper_to_object(self.joints_state.position)
 
