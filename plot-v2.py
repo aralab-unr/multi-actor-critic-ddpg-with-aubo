@@ -60,7 +60,7 @@ args = parser.parse_args()
 data = {}
 data2 = {}
 # paths = [os.path.abspath(os.path.join(path, '..')) for path in glob2.glob(os.path.join(args.dir, '**', 'progress.csv'))]
-paths = ['/home/adarshsehgal/openaiGA']
+paths = ['/home/adarshsehgal/multi-ac-logs-2']
 for curr_path in paths:
     if not os.path.isdir(curr_path):
         continue
@@ -86,7 +86,7 @@ for curr_path in paths:
     # else:
     #     config += '-sparse'
 
-    config = 'GA-DRL'
+    config = 'AACHER'
     env_id = env_id.replace('Dense', '')
 
     # Process and smooth data.
@@ -103,7 +103,7 @@ for curr_path in paths:
         data[env_id][config] = []
     data[env_id][config].append((x, y))
 
-paths = ['/home/adarshsehgal/openaiGA-test']
+paths = ['/home/adarshsehgal/multi-ac-logs']
 for curr_path in paths:
     if not os.path.isdir(curr_path):
         continue
