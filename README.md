@@ -184,6 +184,8 @@ conda create -n opensim-rl -c kidzik -c conda-forge opensim python=3.6.1
 - pip install gym==0.15.6
 - Install the packages needed to install gym
 ```
+sudo apt-get install python-scipy
+pip install scipy
 pip3 install scipy tqdm joblib cloudpickle click opencv-python
 ```
 - pip3 install tensorflow_gpu==1.14.0
@@ -267,7 +269,6 @@ For real robot:
 ```
 roslaunch aubo_i5_robot_config moveit_planning_execution.launch robot_ip:=<your robot ip>
 ```
-Go into the newher directory - `cd newher`
 
 To run the connection between the robot gym environment and moveit run:
 ```
@@ -291,6 +292,7 @@ gedit demo.launch (or just manually open demo.launch in any text editory)
 - AuboReach-v3 - only calculates actions but does not execute joint states (increased learning speed), reward fixes to converge the learning curve, only 4 Aubo joints in action
 - AuboReach-v4 - executes joint states with moveit, only run with first 4 joint states
 - AuboReach-v5 - executes joint states with moveit, only run with first 4 joint states, runs training and testing with random initial and target joint states, CPU = 1, denser rewards
+- AuboReach-v6 - executes joint states with moveit on robot (simulation/real), only run with first 4 joint states, runs training and testing with random initial and target joint states, CPU = 1, denser rewards
 - FetchReacher-v1 - Door opening environment from the paper. Files used are fetch.py, reach.py, robot_env.py and aubo_i5.xml (this file has the configuration for DoorOpening env).
 
 
@@ -349,6 +351,12 @@ where file_path = /tmp/openaiGA/policy_best.pkl in our case.
   - also show scatter of values as background shadow
 - Try Loss as mean, median, mode etc from all networks in both actors and critics
 - Try different number of actors/critics in main/target networks
+- Try with GPU
+- Try with 6 points for Aubo env
+- Try to change n_cycles, n_batches, n_episodes, n_epochs
+- Try with Aubo env-6, where robot actually moves to learn the task
+- Try on door opening environment
+- Try other openai baselines envs to run the code
 
 ## How to plot results:
 For one set of parameter values and for one DRL run, plot results using:

@@ -116,10 +116,22 @@ class DDPGMultiActorCritic(object):
                     compute_Q=False):
         o, g = self._preprocess_og(o, ag, g)
         policy = self.target if use_target_net else self.main
+
         # values to compute
-        vals = [policy.pi_tf]
+        policy_pi_tf_avg = policy.pi_tf_array[0]
+        for i in range(1, len(policy.pi_tf_array)):
+            policy_pi_tf_avg = policy_pi_tf_avg + policy.pi_tf_array[i]
+        policy_pi_tf_avg = policy_pi_tf_avg / len(policy.pi_tf_array)
+        # vals = [policy.pi_tf]
+        vals = [policy_pi_tf_avg]
+
+        policy_Q_pi_tf_avg = policy.Q_pi_tf_array[0]
+        for i in range(1, len(policy.Q_pi_tf_array)):
+            policy_Q_pi_tf_avg = policy_Q_pi_tf_avg + policy.Q_pi_tf_array[i]
+        policy_Q_pi_tf_avg = policy_Q_pi_tf_avg / len(policy.Q_pi_tf_array)
         if compute_Q:
-            vals += [policy.Q_pi_tf]
+            # vals += [policy.Q_pi_tf]
+            vals += [policy_Q_pi_tf_avg]
         # feed
         feed = {
             policy.o_tf: o.reshape(-1, self.dimo),
@@ -178,9 +190,14 @@ class DDPGMultiActorCritic(object):
 
     def _grads(self):
         # Avoid feed_dict here for performance!
+        main_Q_pi_tf_avg = self.main.Q_pi_tf_array[0]
+        for i in range(1, len(self.main.Q_pi_tf_array)):
+            main_Q_pi_tf_avg = main_Q_pi_tf_avg + self.main.Q_pi_tf_array[i]
+        main_Q_pi_tf_avg = main_Q_pi_tf_avg / len(self.main.Q_pi_tf_array)
         critic_loss, actor_loss, Q_grad, pi_grad = self.sess.run([
             self.Q_loss_tf,
-            self.main.Q_pi_tf,
+            # self.main.Q_pi_tf,
+            main_Q_pi_tf_avg,
             self.Q_grad_tf,
             self.pi_grad_tf
         ])

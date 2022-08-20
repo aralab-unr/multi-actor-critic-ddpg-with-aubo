@@ -80,13 +80,13 @@ class PickbotEnv(gym.GoalEnv):
         return [seed]
 
     def reset(self):
-        row_list = [self.counter, self.added_reward]
-        with open('rewards.csv', 'a', encoding='UTF8', newline='') as f:
-            writer = csv.writer(f)
-
-            # write the header
-            writer.writerow(row_list)
-            self.counter = self.counter + 1
+        # row_list = [self.counter, self.added_reward]
+        # with open('rewards.csv', 'a', encoding='UTF8', newline='') as f:
+        #     writer = csv.writer(f)
+        #
+        #     # write the header
+        #     writer.writerow(row_list)
+        #     self.counter = self.counter + 1
 
         self.added_reward = 0
 

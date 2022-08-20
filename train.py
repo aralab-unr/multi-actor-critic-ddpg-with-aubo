@@ -64,10 +64,10 @@ def train(policy, rollout_worker, evaluator,
         # record logs
         logger.record_tabular('epoch', epoch)
         for key, val in evaluator.logs('test'):
-            row_list1 = [key, mpi_average(val)]
-            with open('fetch_push_vals.csv', 'a', encoding='UTF8', newline= '') as f:
-                writer = csv.writer(f)
-                writer.writerow(row_list1)
+            # row_list1 = [key, mpi_average(val)]
+            # with open('fetch_push_vals.csv', 'a', encoding='UTF8', newline= '') as f:
+            #     writer = csv.writer(f)
+            #     writer.writerow(row_list1)
             logger.record_tabular(key, mpi_average(val))
         for key, val in rollout_worker.logs('train'):
             logger.record_tabular(key, mpi_average(val))
@@ -272,10 +272,10 @@ def launch(
 
 
 @click.command()
-@click.option('--env', type=str, default='AuboReach-v3', help='the name of the OpenAI Gym environment that you want to train on')
+@click.option('--env', type=str, default='AuboReach-v5', help='the name of the OpenAI Gym environment that you want to train on')
 @click.option('--logdir', type=str, default='/tmp/multi-actor-critic-ddpg-with-aubo', help='the path to where logs and policy pickles should go. If not specified, creates a folder in /tmp/')
 @click.option('--n_epochs', type=int, default=40, help='the number of training epochs to run')
-@click.option('--num_cpu', type=int, default=4, help='the number of CPU cores to use (using MPI)')
+@click.option('--num_cpu', type=int, default=6, help='the number of CPU cores to use (using MPI)')
 @click.option('--seed', type=int, default=0, help='the random seed used to seed both the environment and the training code')
 @click.option('--policy_save_interval', type=int, default=5, help='the interval with which policy pickles are saved. If set to 0, only the best and latest policy will be pickled.')
 @click.option('--replay_strategy', type=click.Choice(['future', 'none']), default='future', help='the HER replay strategy to be used. "future" uses HER, "none" disables HER.')
