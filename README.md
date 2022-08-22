@@ -416,6 +416,11 @@ where file_path = /tmp/openaiGA/policy_best.pkl in our case.
 - Changed n_cycles from 50 to 15
 - Changed n_batches from 40 to 15
 
+## how to run the AACHER algorithm with different settings
+- Use 'test_script_multi_actor_critic.py'
+- Use this file to write any test cases
+- Use plot files to compare various test cases in one plot
+
 ## How to plot results:
 For one set of parameter values and for one DRL run, plot results using:
 ```
