@@ -273,9 +273,9 @@ def launch(
 
 @click.command()
 @click.option('--env', type=str, default='AuboReach-v5', help='the name of the OpenAI Gym environment that you want to train on')
-@click.option('--logdir', type=str, default='/home/adarshsehgal/multi-ac-logs-2', help='the path to where logs and policy pickles should go. If not specified, creates a folder in /tmp/')
+@click.option('--logdir', type=str, default='/home/adarshsehgal/AACHER_logs/multi-ac-logs-3', help='the path to where logs and policy pickles should go. If not specified, creates a folder in /tmp/')
 @click.option('--n_epochs', type=int, default=40, help='the number of training epochs to run')
-@click.option('--num_cpu', type=int, default=6, help='the number of CPU cores to use (using MPI)')
+@click.option('--num_cpu', type=int, default=3, help='the number of CPU cores to use (using MPI)')
 @click.option('--seed', type=int, default=0, help='the random seed used to seed both the environment and the training code')
 @click.option('--policy_save_interval', type=int, default=5, help='the interval with which policy pickles are saved. If set to 0, only the best and latest policy will be pickled.')
 @click.option('--replay_strategy', type=click.Choice(['future', 'none']), default='future', help='the HER replay strategy to be used. "future" uses HER, "none" disables HER.')
@@ -287,9 +287,9 @@ def launch(
 @click.option('--random_epsilon', type=float, default=0.3, help='percentage of time a random action is taken')
 @click.option('--noise_epsilon', type=float, default=0.2, help='std of gaussian noise added to not-completely-random actions as a percentage of max_u')
 @click.option('--number_actors_main', type=int, default=1, help='number of actors to to used in main network')
-@click.option('--number_critics_main', type=int, default=2, help='number of critics to be used in main network')
+@click.option('--number_critics_main', type=int, default=3, help='number of critics to be used in main network')
 @click.option('--number_actors_target', type=int, default=1, help='number of actors to be used in target network')
-@click.option('--number_critics_target', type=int, default=2, help='number of critics to to used in target network')
+@click.option('--number_critics_target', type=int, default=3, help='number of critics to to used in target network')
 @click.option('--central_tendency', type=str, default='mean', help='used to decide which measure of central tendency to be used: mean, median, mode etc.')
 def main(**kwargs):
     launch(**kwargs)

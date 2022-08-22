@@ -219,6 +219,59 @@ pip3 install mpi4py
 sudo apt-get install -y python3-mpi4py
 sudo apt-get install --reinstall openmpi-bin libopenmpi-dev
 ```
+
+- Upgrading version of MPI to 1.10.7 (Fixes errors with MPI when running train.py with GPU)
+```
+Download .rpm file from https://www.open-mpi.org/software/ompi/v1.10/
+Extract files to $HOME directory
+cd 
+mkdir openmpi-1.10.7 # new empty folder
+cd openmpi-1.10.7/ # extracted folder
+mkdir build
+cd build
+../configure --prefix=/home/adarshsehgal/openmpi1.10.7/
+make all install
+sudo gedit ~/.bashrc
+Add 'export PATH=/home/adarshsehgal/openmpi1.10.7/bin:$PATH'
+Add 'export LD_LIBRARY_PATH=/home/adarshsehgal/openmpi1.10.7/lib:$LD_LIBRARY_PATH:'
+source ~/.bashrc
+```
+
+Open MPI v4.1.4
+```
+Download .rpm file from https://www.open-mpi.org/software/ompi/v4.1/
+Extract files to $HOME directory
+cd 
+mkdir openmpi4.1.4 # new empty folder
+cd openmpi-4.1.4/ # extracted folder
+mkdir build
+cd build
+../configure --prefix=/home/adarshsehgal/openmpi4.1.4/
+make all install
+sudo gedit ~/.bashrc
+Add 'export PATH=/home/adarshsehgal/openmpi4.1.4/bin:$PATH'
+Add 'export LD_LIBRARY_PATH=/home/adarshsehgal/openmpi4.1.4/lib:$LD_LIBRARY_PATH:'
+source ~/.bashrc
+```
+
+Open MPI v3.0.6
+```
+Download .rpm file from https://www.open-mpi.org/software/ompi/v3.0/
+Extract files to $HOME directory
+cd 
+mkdir openmpi3.0.6 # new empty folder
+cd openmpi-3.0.6/ # extracted folder
+mkdir build
+cd build
+../configure --prefix=/home/adarshsehgal/openmpi3.0.6/
+make all install
+sudo gedit ~/.bashrc
+Add 'export PATH=/home/adarshsehgal/openmpi3.0.6/bin:$PATH'
+Add 'export LD_LIBRARY_PATH=/home/adarshsehgal/openmpi3.0.6/lib:$LD_LIBRARY_PATH:'
+source ~/.bashrc
+mpirun -np 2 --bind-to core /home/adarshsehgal/anaconda3/envs/opensim-rl/bin/python3 train.py
+```
+
 - No need to install mujoco-py, since the code uses Rviz
 - GPU packages installation (Ubuntu 16.04) - https://towardsdatascience.com/deep-learning-gpu-installation-on-ubuntu-18-4-9b12230a1d31
   - Make sure graphic card driver AND Cuda is installed

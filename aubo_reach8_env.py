@@ -2,7 +2,7 @@
 
 # IMPORT
 import gym
-import rospy
+# import rospy
 import numpy as np
 import time
 import random
@@ -11,7 +11,7 @@ import yaml
 import math
 import datetime
 import csv
-import rospkg
+# import rospkg
 from gym import utils, spaces
 from gym.utils import seeding
 from gym.envs.registration import register
