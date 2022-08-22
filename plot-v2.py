@@ -60,7 +60,7 @@ args = parser.parse_args()
 data = {}
 data2 = {}
 # paths = [os.path.abspath(os.path.join(path, '..')) for path in glob2.glob(os.path.join(args.dir, '**', 'progress.csv'))]
-paths = ['/home/adarshsehgal/AACHER_logs/multi-ac-logs-3']
+paths = ['/home/adarshsehgal/AACHER_logs/multi-ac-logs-A1C3']
 for curr_path in paths:
     if not os.path.isdir(curr_path):
         continue
