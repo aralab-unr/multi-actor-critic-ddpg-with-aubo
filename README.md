@@ -377,7 +377,6 @@ where file_path = /tmp/openaiGA/policy_best.pkl in our case.
   - 'number_actors_target' in train.py
   - 'number_critics_target' in train.py
   - 'number_critics_target' in train.py # used to decide which measure of central tendency to be used (only mean implemented)
-  - 
 
 - New files for ddpg_multi-actor-critic
   - ddpg_multi_actor_critic.py
@@ -395,7 +394,7 @@ where file_path = /tmp/openaiGA/policy_best.pkl in our case.
 - How to maintain network name after taking average of networks
 - Q_grads_tf and pi_grads_tf network names in ddpg_multi_actor_critic.py?
 
-## How to compare DDPG+HER with Multi Actor/Critic with HER
+## How to compare DDPG+HER with Multi Actor/Critic with HER (called AACHER algorithm)
 - Run 20 times, and take average (20 independent trails)
 - Average Q values over epochs 
   - also show scatter of values as background shadow
@@ -415,6 +414,14 @@ where file_path = /tmp/openaiGA/policy_best.pkl in our case.
 - Try other openai baselines envs to run the code
 - Changed n_cycles from 50 to 15
 - Changed n_batches from 40 to 15
+- Changed num_cpu from 4 to 2
+- Try with different number of hidden layers (Currently set to 3)
+- Try to plot loss per epoch
+
+## Experiments performed with AACHER
+- Increasing number of critics is increasing the performance (Number of actors is set to 1)
+  - Tested with A1C3, A1C5, A1C7
+  - A1C7 has the highest performance
 
 ## how to run the AACHER algorithm with different settings
 - Use 'test_script_multi_actor_critic.py'
