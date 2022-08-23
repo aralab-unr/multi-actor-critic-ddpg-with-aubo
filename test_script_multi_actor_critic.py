@@ -82,7 +82,7 @@ os.system('python3 -m train '
 
 # A7C7
 os.system('python3 -m train '
-          '--logdir=/home/adarshsehgal/AACHER_logs/A5C7 '
+          '--logdir=/home/adarshsehgal/AACHER_logs/A7C7 '
           '--number_actors_main=7 '
           '--number_critics_main=7 '
           '--number_actors_target=7 '
@@ -92,7 +92,7 @@ os.system('python3 -m train '
 
 # A8C8
 os.system('python3 -m train '
-          '--logdir=/home/adarshsehgal/AACHER_logs/A1C8 '
+          '--logdir=/home/adarshsehgal/AACHER_logs/A8C8 '
           '--number_actors_main=8 '
           '--number_critics_main=8 '
           '--number_actors_target=8 '
@@ -112,7 +112,7 @@ os.system('python3 -m train '
 
 # A10C10
 os.system('python3 -m train '
-          '--logdir=/home/adarshsehgal/AACHER_logs/A1C8 '
+          '--logdir=/home/adarshsehgal/AACHER_logs/A10C10 '
           '--number_actors_main=10 '
           '--number_critics_main=10 '
           '--number_actors_target=10 '
