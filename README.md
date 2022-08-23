@@ -433,6 +433,13 @@ where, dir = /tmp/openaiGA in our case, as mentioned in ga.py file. You can prov
 sys.exit()
 ```
 
+To plot test_success_rate, test_reward and test_mean_Q for various settings
+```
+python plot-all-comparison.py <dir>
+python plot.py /home/adarshsehgal/AACHER_logs
+```
+where, dir = /home/adarshsehgal/AACHER_logs in our case
+
 ## Aubo environment setup details:
 **NOTE**: Some experiments are using less than 6 joints for learning. Please refer to environments section for details.
 
