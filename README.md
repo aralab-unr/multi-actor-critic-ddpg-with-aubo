@@ -160,7 +160,7 @@ pip3 install rotations
 pip install matplotlib
 pip install seaborn
 pip install glob2
-pip3 install -U 'mujoco-py<2.2,>=2.1'
+# pip3 install -U 'mujoco-py<2.2,>=2.1'
 sudo apt-get install patchelf
 pip3 install torch==1.1.0 # torch-1.1.0
 source /opt/ros/kinetic/setup.bash
