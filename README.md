@@ -200,7 +200,7 @@ git clone https://github.com/adarshsehgal/openai_ros
 git clone https://bitbucket.org/theconstructcore/theconstruct_msgs/src/master/
 cd openai_ros
 git checkout kinetic-devel
-cd ..
+cd ~/catkin_workspace/
 catkin build
 rosdep update --include-eol-distros
 source devel/setup.bash
