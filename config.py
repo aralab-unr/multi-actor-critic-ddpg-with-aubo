@@ -16,7 +16,7 @@ from aubo_reach6_env import PickbotEnv
 from aubo_reach7_env import PickbotEnv
 from aubo_reach8_env import PickbotEnv
 from aubo_reach9_env import PickbotEnv
-from reach import FetchReachEnv
+# from reach import FetchReachEnv
 DEFAULT_ENV_PARAMS = {
     # 'AuboReach-v2': {
     #     'n_cycles': 10,

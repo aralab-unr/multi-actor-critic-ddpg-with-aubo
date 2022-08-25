@@ -96,7 +96,7 @@ conda install Pillow
 ```
 
 - Must have compiled the aubo robot github repo under the kinetic branch,which can be found here:
-  - It is safe to remove auto_controller/aubo_demo folder in src if you get build error with this package
+  - It is safe to remove **auto_controller/aubo_demo** folder in src if you get build error with this package
 ```
 https://github.com/adarshsehgal/aubo_robot/tree/kinetic
 ```
@@ -160,7 +160,7 @@ pip3 install rotations
 pip install matplotlib
 pip install seaborn
 pip install glob2
-pip3 install -U 'mujoco-py<2.2,>=2.1'
+# pip3 install -U 'mujoco-py<2.2,>=2.1'
 sudo apt-get install patchelf
 pip3 install torch==1.1.0 # torch-1.1.0
 source /opt/ros/kinetic/setup.bash
@@ -199,8 +199,8 @@ cd ~/catkin_workspace/src
 git clone https://github.com/adarshsehgal/openai_ros
 git clone https://bitbucket.org/theconstructcore/theconstruct_msgs/src/master/
 cd openai_ros
-git checkout kinetic_devel
-cd ..
+git checkout kinetic-devel
+cd ~/catkin_workspace/
 catkin build
 rosdep update --include-eol-distros
 source devel/setup.bash
