@@ -417,11 +417,14 @@ where file_path = /tmp/openaiGA/policy_best.pkl in our case.
 - Changed num_cpu from 4 to 2
 - Try with different number of hidden layers (Currently set to 3)
 - Try to plot loss per epoch
+- Changed layers from 3 to 2
+- Changed hidden from 256 to 128
 
 ## Experiments performed with AACHER
 - Increasing number of critics is increasing the performance (Number of actors is set to 1)
   - Tested with A1C3, A1C5, A1C7
   - A1C7 has the highest performance
+- Tested with 3 hidden layers and 256 neurons, training taking long time
 
 ## how to run the AACHER algorithm with different settings
 - Use 'test_script_multi_actor_critic.py'
