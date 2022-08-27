@@ -446,9 +446,16 @@ sys.exit()
 To plot test_success_rate, test_reward and test_mean_Q for various settings
 ```
 python plot-all-comparison.py <dir>
-python plot.py /home/adarshsehgal/AACHER_logs
+python plot-all-comparison.py /home/adarshsehgal/workspace/multi-actor-critic-ddpg-with-aubo/Experiments/data
 ```
-where, dir = /home/adarshsehgal/AACHER_logs in our case
+where, dir = /home/adarshsehgal/workspace/multi-actor-critic-ddpg-with-aubo/Experiments/data in our case
+
+To plot AVERAGE OVER MULTIPLE RUNS test_success_rate, test_reward and test_mean_Q for various settings
+```
+python plot-all-comparison-average.py <dir>
+python plot-all-comparison-average.py /home/adarshsehgal/workspace/multi-actor-critic-ddpg-with-aubo/Experiments/data
+```
+where, dir = /home/adarshsehgal/workspace/multi-actor-critic-ddpg-with-aubo/Experiments/data in our case
 
 ## Aubo environment setup details:
 **NOTE**: Some experiments are using less than 6 joints for learning. Please refer to environments section for details.
