@@ -1,0 +1,313 @@
+Logging to /home/adarshsehgal/AACHER_logs/A1C5
+T: 50
+_Q_lr: 0.001
+_action_l2: 1.0
+_batch_size: 256
+_buffer_size: 1000000
+_clip_obs: 200.0
+_hidden: 128
+_layers: 2
+_max_u: 1.7
+_network_class: multi_actor_critic:MultiActorCritic
+_norm_clip: 5
+_norm_eps: 0.01
+_number_actors_main: 1
+_number_actors_target: 1
+_number_critics_main: 5
+_number_critics_target: 5
+_pi_lr: 0.001
+_polyak: 0.95
+_relative_goals: False
+_scope: ddpg
+central_tendency: mean
+ddpg_params: {'buffer_size': 1000000, 'hidden': 128, 'layers': 2, 'network_class': 'multi_actor_critic:MultiActorCritic', 'polyak': 0.95, 'batch_size': 256, 'Q_lr': 0.001, 'pi_lr': 0.001, 'norm_eps': 0.01, 'norm_clip': 5, 'max_u': 1.7, 'action_l2': 1.0, 'clip_obs': 200.0, 'scope': 'ddpg', 'relative_goals': False, 'number_actors_main': 1, 'number_critics_main': 5, 'number_actors_target': 1, 'number_critics_target': 5}
+env_name: AuboReach-v5
+gamma: 0.98
+make_env: <function prepare_params.<locals>.make_env at 0x7ff79f345f28>
+n_batches: 15
+n_cycles: 15
+n_test_rollouts: 10
+noise_eps: 0.2
+random_eps: 0.3
+replay_k: 4
+replay_strategy: future
+rl_algo: ddpg_multi_actor_critic
+rollout_batch_size: 2
+test_with_polyak: False
+Creating a DDPGMultiActorCritic agent with action space 4 x 1.7...
+Training...
+--------------------------------------------
+| epoch              | 0                   |
+| stats_g/mean       | -0.039094944        |
+| stats_g/std        | 1.0293752           |
+| stats_o/mean       | 0.0017946567        |
+| stats_o/std        | 1.1551212           |
+| test/episode       | 20.0                |
+| test/mean_Q        | -3.558401           |
+| test/reward        | -242.909016327375   |
+| test/steps         | 1000.0              |
+| test/success_rate  | 0.0                 |
+| train/episode      | 30.0                |
+| train/reward       | -228.18922863000498 |
+| train/steps        | 1500.0              |
+| train/success_rate | 0.0                 |
+--------------------------------------------
+New best success rate: 0.0. Saving policy to /home/adarshsehgal/AACHER_logs/A1C5/policy_best.pkl ...
+Saving periodic policy to /home/adarshsehgal/AACHER_logs/A1C5/policy_0.pkl ...
+-------------------------------------------
+| epoch              | 1                  |
+| stats_g/mean       | 0.02771986         |
+| stats_g/std        | 1.0030209          |
+| stats_o/mean       | 0.0707804          |
+| stats_o/std        | 1.1374898          |
+| test/episode       | 40.0               |
+| test/mean_Q        | -4.046616          |
+| test/reward        | -233.7163287640194 |
+| test/steps         | 2000.0             |
+| test/success_rate  | 0.0                |
+| train/episode      | 60.0               |
+| train/reward       | -238.7962890673223 |
+| train/steps        | 3000.0             |
+| train/success_rate | 0.0                |
+-------------------------------------------
+New best success rate: 0.0. Saving policy to /home/adarshsehgal/AACHER_logs/A1C5/policy_best.pkl ...
+--------------------------------------------
+| epoch              | 2                   |
+| stats_g/mean       | 0.017790444         |
+| stats_g/std        | 0.9579179           |
+| stats_o/mean       | 0.07425587          |
+| stats_o/std        | 1.0977209           |
+| test/episode       | 60.0                |
+| test/mean_Q        | -4.433447           |
+| test/reward        | -159.03066948789393 |
+| test/steps         | 3000.0              |
+| test/success_rate  | 0.0                 |
+| train/episode      | 90.0                |
+| train/reward       | -277.8482678228141  |
+| train/steps        | 4500.0              |
+| train/success_rate | 0.0                 |
+--------------------------------------------
+New best success rate: 0.0. Saving policy to /home/adarshsehgal/AACHER_logs/A1C5/policy_best.pkl ...
+--------------------------------------------
+| epoch              | 3                   |
+| stats_g/mean       | 0.0092382           |
+| stats_g/std        | 0.9268348           |
+| stats_o/mean       | 0.04924878          |
+| stats_o/std        | 1.0663824           |
+| test/episode       | 80.0                |
+| test/mean_Q        | -4.7185903          |
+| test/reward        | -128.70449457240647 |
+| test/steps         | 4000.0              |
+| test/success_rate  | 0.0                 |
+| train/episode      | 120.0               |
+| train/reward       | -188.5054810970455  |
+| train/steps        | 6000.0              |
+| train/success_rate | 0.0                 |
+--------------------------------------------
+New best success rate: 0.0. Saving policy to /home/adarshsehgal/AACHER_logs/A1C5/policy_best.pkl ...
+--------------------------------------------
+| epoch              | 4                   |
+| stats_g/mean       | 0.020621859         |
+| stats_g/std        | 0.9119298           |
+| stats_o/mean       | 0.051775686         |
+| stats_o/std        | 1.027349            |
+| test/episode       | 100.0               |
+| test/mean_Q        | -4.617193           |
+| test/reward        | -146.41164159578256 |
+| test/steps         | 5000.0              |
+| test/success_rate  | 0.025               |
+| train/episode      | 150.0               |
+| train/reward       | -105.42763667463254 |
+| train/steps        | 7500.0              |
+| train/success_rate | 0.0                 |
+--------------------------------------------
+New best success rate: 0.025. Saving policy to /home/adarshsehgal/AACHER_logs/A1C5/policy_best.pkl ...
+---------------------------------------------
+| epoch              | 5                    |
+| stats_g/mean       | 0.017303718          |
+| stats_g/std        | 0.90260506           |
+| stats_o/mean       | 0.04040685           |
+| stats_o/std        | 1.0064569            |
+| test/episode       | 120.0                |
+| test/mean_Q        | -4.5057383           |
+| test/reward        | -54.41913155830076   |
+| test/steps         | 6000.0               |
+| test/success_rate  | 0.025                |
+| train/episode      | 180.0                |
+| train/reward       | -210.2780515511381   |
+| train/steps        | 9000.0               |
+| train/success_rate | 0.016666666666666666 |
+---------------------------------------------
+New best success rate: 0.025. Saving policy to /home/adarshsehgal/AACHER_logs/A1C5/policy_best.pkl ...
+Saving periodic policy to /home/adarshsehgal/AACHER_logs/A1C5/policy_5.pkl ...
+--------------------------------------------
+| epoch              | 6                   |
+| stats_g/mean       | 0.010039141         |
+| stats_g/std        | 0.898129            |
+| stats_o/mean       | 0.03637442          |
+| stats_o/std        | 0.99044704          |
+| test/episode       | 140.0               |
+| test/mean_Q        | -4.6515493          |
+| test/reward        | -99.38568574799464  |
+| test/steps         | 7000.0              |
+| test/success_rate  | 0.525               |
+| train/episode      | 210.0               |
+| train/reward       | -100.82725067475317 |
+| train/steps        | 10500.0             |
+| train/success_rate | 0.03333333333333333 |
+--------------------------------------------
+New best success rate: 0.525. Saving policy to /home/adarshsehgal/AACHER_logs/A1C5/policy_best.pkl ...
+--------------------------------------------
+| epoch              | 7                   |
+| stats_g/mean       | -0.0077328775       |
+| stats_g/std        | 0.8957704           |
+| stats_o/mean       | 0.025128478         |
+| stats_o/std        | 0.97412795          |
+| test/episode       | 160.0               |
+| test/mean_Q        | -5.4784527          |
+| test/reward        | -68.7344348807712   |
+| test/steps         | 8000.0              |
+| test/success_rate  | 0.7250000000000001  |
+| train/episode      | 240.0               |
+| train/reward       | -194.65155865212236 |
+| train/steps        | 12000.0             |
+| train/success_rate | 0.13333333333333333 |
+--------------------------------------------
+New best success rate: 0.7250000000000001. Saving policy to /home/adarshsehgal/AACHER_logs/A1C5/policy_best.pkl ...
+--------------------------------------------
+| epoch              | 8                   |
+| stats_g/mean       | -0.0035105944       |
+| stats_g/std        | 0.8990476           |
+| stats_o/mean       | 0.018239528         |
+| stats_o/std        | 0.9590688           |
+| test/episode       | 180.0               |
+| test/mean_Q        | -4.257819           |
+| test/reward        | -70.56158098141309  |
+| test/steps         | 9000.0              |
+| test/success_rate  | 1.0                 |
+| train/episode      | 270.0               |
+| train/reward       | -176.672390085445   |
+| train/steps        | 13500.0             |
+| train/success_rate | 0.26666666666666666 |
+--------------------------------------------
+New best success rate: 1.0. Saving policy to /home/adarshsehgal/AACHER_logs/A1C5/policy_best.pkl ...
+--------------------------------------------
+| epoch              | 9                   |
+| stats_g/mean       | 0.008107859         |
+| stats_g/std        | 0.90094596          |
+| stats_o/mean       | 0.018873844         |
+| stats_o/std        | 0.9469296           |
+| test/episode       | 200.0               |
+| test/mean_Q        | -4.9002676          |
+| test/reward        | -61.00559447682872  |
+| test/steps         | 10000.0             |
+| test/success_rate  | 1.0                 |
+| train/episode      | 300.0               |
+| train/reward       | -143.3164988088069  |
+| train/steps        | 15000.0             |
+| train/success_rate | 0.26666666666666666 |
+--------------------------------------------
+New best success rate: 1.0. Saving policy to /home/adarshsehgal/AACHER_logs/A1C5/policy_best.pkl ...
+--------------------------------------------
+| epoch              | 10                  |
+| stats_g/mean       | 0.0064208237        |
+| stats_g/std        | 0.90242845          |
+| stats_o/mean       | 0.015106266         |
+| stats_o/std        | 0.93595445          |
+| test/episode       | 220.0               |
+| test/mean_Q        | -4.8441286          |
+| test/reward        | -63.30149833524136  |
+| test/steps         | 11000.0             |
+| test/success_rate  | 1.0                 |
+| train/episode      | 330.0               |
+| train/reward       | -122.85874369868284 |
+| train/steps        | 16500.0             |
+| train/success_rate | 0.33333333333333337 |
+--------------------------------------------
+New best success rate: 1.0. Saving policy to /home/adarshsehgal/AACHER_logs/A1C5/policy_best.pkl ...
+Saving periodic policy to /home/adarshsehgal/AACHER_logs/A1C5/policy_10.pkl ...
+-------------------------------------------
+| epoch              | 11                 |
+| stats_g/mean       | 0.0037940799       |
+| stats_g/std        | 0.8997176          |
+| stats_o/mean       | 0.013170099        |
+| stats_o/std        | 0.9236125          |
+| test/episode       | 240.0              |
+| test/mean_Q        | -5.169818          |
+| test/reward        | -81.71410262419181 |
+| test/steps         | 12000.0            |
+| test/success_rate  | 1.0                |
+| train/episode      | 360.0              |
+| train/reward       | -82.72245342312468 |
+| train/steps        | 18000.0            |
+| train/success_rate | 0.5                |
+-------------------------------------------
+New best success rate: 1.0. Saving policy to /home/adarshsehgal/AACHER_logs/A1C5/policy_best.pkl ...
+--------------------------------------------
+| epoch              | 12                  |
+| stats_g/mean       | 0.0048320107        |
+| stats_g/std        | 0.90188956          |
+| stats_o/mean       | 0.014712468         |
+| stats_o/std        | 0.91619533          |
+| test/episode       | 260.0               |
+| test/mean_Q        | -5.220665           |
+| test/reward        | -64.11181038757832  |
+| test/steps         | 13000.0             |
+| test/success_rate  | 1.0                 |
+| train/episode      | 390.0               |
+| train/reward       | -131.44625994223372 |
+| train/steps        | 19500.0             |
+| train/success_rate | 0.3666666666666667  |
+--------------------------------------------
+New best success rate: 1.0. Saving policy to /home/adarshsehgal/AACHER_logs/A1C5/policy_best.pkl ...
+-------------------------------------------
+| epoch              | 13                 |
+| stats_g/mean       | 0.007970566        |
+| stats_g/std        | 0.8995019          |
+| stats_o/mean       | 0.015599255        |
+| stats_o/std        | 0.907624           |
+| test/episode       | 280.0              |
+| test/mean_Q        | -5.1978865         |
+| test/reward        | -70.50752214602564 |
+| test/steps         | 14000.0            |
+| test/success_rate  | 1.0                |
+| train/episode      | 420.0              |
+| train/reward       | -75.41161732127534 |
+| train/steps        | 21000.0            |
+| train/success_rate | 0.4                |
+-------------------------------------------
+New best success rate: 1.0. Saving policy to /home/adarshsehgal/AACHER_logs/A1C5/policy_best.pkl ...
+-------------------------------------------
+| epoch              | 14                 |
+| stats_g/mean       | 0.0043736827       |
+| stats_g/std        | 0.89567006         |
+| stats_o/mean       | 0.015850266        |
+| stats_o/std        | 0.89878714         |
+| test/episode       | 300.0              |
+| test/mean_Q        | -5.1252594         |
+| test/reward        | -48.29754216866983 |
+| test/steps         | 15000.0            |
+| test/success_rate  | 0.95               |
+| train/episode      | 450.0              |
+| train/reward       | -83.13317760917138 |
+| train/steps        | 22500.0            |
+| train/success_rate | 0.4166666666666667 |
+-------------------------------------------
+--------------------------------------------
+| epoch              | 15                  |
+| stats_g/mean       | 0.0059393733        |
+| stats_g/std        | 0.89508235          |
+| stats_o/mean       | 0.0156505           |
+| stats_o/std        | 0.8924564           |
+| test/episode       | 320.0               |
+| test/mean_Q        | -5.5583253          |
+| test/reward        | -84.18842503067765  |
+| test/steps         | 16000.0             |
+| test/success_rate  | 1.0                 |
+| train/episode      | 480.0               |
+| train/reward       | -101.61160260087527 |
+| train/steps        | 24000.0             |
+| train/success_rate | 0.3333333333333333  |
+--------------------------------------------
+New best success rate: 1.0. Saving policy to /home/adarshsehgal/AACHER_logs/A1C5/policy_best.pkl ...
+Saving periodic policy to /home/adarshsehgal/AACHER_logs/A1C5/policy_15.pkl ...
