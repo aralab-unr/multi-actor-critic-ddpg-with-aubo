@@ -1,0 +1,90 @@
+Logging to /home/adarshsehgal/AACHER_logs/A8C8-1
+T: 50
+_Q_lr: 0.001
+_action_l2: 1.0
+_batch_size: 256
+_buffer_size: 1000000
+_clip_obs: 200.0
+_hidden: 128
+_layers: 2
+_max_u: 1.7
+_network_class: multi_actor_critic:MultiActorCritic
+_norm_clip: 5
+_norm_eps: 0.01
+_number_actors_main: 8
+_number_actors_target: 8
+_number_critics_main: 8
+_number_critics_target: 8
+_pi_lr: 0.001
+_polyak: 0.95
+_relative_goals: False
+_scope: ddpg
+central_tendency: mean
+ddpg_params: {'buffer_size': 1000000, 'hidden': 128, 'layers': 2, 'network_class': 'multi_actor_critic:MultiActorCritic', 'polyak': 0.95, 'batch_size': 256, 'Q_lr': 0.001, 'pi_lr': 0.001, 'norm_eps': 0.01, 'norm_clip': 5, 'max_u': 1.7, 'action_l2': 1.0, 'clip_obs': 200.0, 'scope': 'ddpg', 'relative_goals': False, 'number_actors_main': 8, 'number_critics_main': 8, 'number_actors_target': 8, 'number_critics_target': 8}
+env_name: AuboReach-v5
+gamma: 0.98
+make_env: <function prepare_params.<locals>.make_env at 0x7f4e97a90268>
+n_batches: 15
+n_cycles: 15
+n_test_rollouts: 10
+noise_eps: 0.2
+random_eps: 0.3
+replay_k: 4
+replay_strategy: future
+rl_algo: ddpg_multi_actor_critic
+rollout_batch_size: 2
+test_with_polyak: False
+Creating a DDPGMultiActorCritic agent with action space 4 x 1.7...
+Training...
+--------------------------------------------
+| epoch              | 0                   |
+| stats_g/mean       | -0.035865903        |
+| stats_g/std        | 0.9046818           |
+| stats_o/mean       | -0.0991002          |
+| stats_o/std        | 1.0875583           |
+| test/episode       | 20.0                |
+| test/mean_Q        | -2.8204563          |
+| test/reward        | -221.30716838221167 |
+| test/steps         | 1000.0              |
+| test/success_rate  | 0.0                 |
+| train/episode      | 30.0                |
+| train/reward       | -224.7327239422765  |
+| train/steps        | 1500.0              |
+| train/success_rate | 0.0                 |
+--------------------------------------------
+New best success rate: 0.0. Saving policy to /home/adarshsehgal/AACHER_logs/A8C8-1/policy_best.pkl ...
+Saving periodic policy to /home/adarshsehgal/AACHER_logs/A8C8-1/policy_0.pkl ...
+--------------------------------------------
+| epoch              | 1                   |
+| stats_g/mean       | -0.015604401        |
+| stats_g/std        | 0.91588944          |
+| stats_o/mean       | -0.061491903        |
+| stats_o/std        | 1.0674405           |
+| test/episode       | 40.0                |
+| test/mean_Q        | -3.5199986          |
+| test/reward        | -148.84909516524567 |
+| test/steps         | 2000.0              |
+| test/success_rate  | 0.0                 |
+| train/episode      | 60.0                |
+| train/reward       | -247.38062705202037 |
+| train/steps        | 3000.0              |
+| train/success_rate | 0.0                 |
+--------------------------------------------
+New best success rate: 0.0. Saving policy to /home/adarshsehgal/AACHER_logs/A8C8-1/policy_best.pkl ...
+--------------------------------------------
+| epoch              | 2                   |
+| stats_g/mean       | 0.023991564         |
+| stats_g/std        | 0.89161587          |
+| stats_o/mean       | -0.011016205        |
+| stats_o/std        | 1.0341562           |
+| test/episode       | 60.0                |
+| test/mean_Q        | -3.8761277          |
+| test/reward        | -184.93890902591664 |
+| test/steps         | 3000.0              |
+| test/success_rate  | 0.0                 |
+| train/episode      | 90.0                |
+| train/reward       | -176.7247897161203  |
+| train/steps        | 4500.0              |
+| train/success_rate | 0.0                 |
+--------------------------------------------
+New best success rate: 0.0. Saving policy to /home/adarshsehgal/AACHER_logs/A8C8-1/policy_best.pkl ...

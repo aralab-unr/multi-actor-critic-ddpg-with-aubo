@@ -174,3 +174,20 @@ New best success rate: 0.475. Saving policy to /home/adarshsehgal/AACHER_logs/A5
 | train/success_rate | 0.06666666666666667 |
 --------------------------------------------
 New best success rate: 0.65. Saving policy to /home/adarshsehgal/AACHER_logs/A5C7-1/policy_best.pkl ...
+--------------------------------------------
+| epoch              | 8                   |
+| stats_g/mean       | 0.024569785         |
+| stats_g/std        | 0.88905656          |
+| stats_o/mean       | 0.021476902         |
+| stats_o/std        | 0.94951826          |
+| test/episode       | 180.0               |
+| test/mean_Q        | -4.6166816          |
+| test/reward        | -56.7815717006701   |
+| test/steps         | 9000.0              |
+| test/success_rate  | 0.975               |
+| train/episode      | 270.0               |
+| train/reward       | -117.76341346837609 |
+| train/steps        | 13500.0             |
+| train/success_rate | 0.13333333333333333 |
+--------------------------------------------
+New best success rate: 0.975. Saving policy to /home/adarshsehgal/AACHER_logs/A5C7-1/policy_best.pkl ...
