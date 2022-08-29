@@ -426,6 +426,8 @@ where file_path = /tmp/openaiGA/policy_best.pkl in our case.
   - Tested with A1C3, A1C5, A1C7
   - A1C7 has the highest performance
 - Tested with 3 hidden layers and 256 neurons, training taking long time
+- Tested with batch size 256, but process keeps getting killed even with num_cpu=2
+- Changed batch size to 64, so that program does not get killed because of CPU memory limitations
 
 ## how to run the AACHER algorithm with different settings
 - Use 'test_script_multi_actor_critic.py'
