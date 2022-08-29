@@ -420,6 +420,7 @@ where file_path = /tmp/openaiGA/policy_best.pkl in our case.
 - Changed layers from 3 to 2
 - Changed hidden from 256 to 128
 - Changed batch_size from 256 to 64
+- Changed batch_size from 64 to 32
 
 ## Experiments performed with AACHER
 - Increasing number of critics is increasing the performance (Number of actors is set to 1)
