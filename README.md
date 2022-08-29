@@ -461,6 +461,12 @@ python plot-all-comparison-average.py /home/adarshsehgal/workspace/multi-actor-c
 ```
 where, dir = /home/adarshsehgal/workspace/multi-actor-critic-ddpg-with-aubo/Experiments/data in our case
 
+## How to monitor CPU RAM usage:
+```
+sudo apt-get install htop
+htop
+```
+
 ## Aubo environment setup details:
 **NOTE**: Some experiments are using less than 6 joints for learning. Please refer to environments section for details.
 
