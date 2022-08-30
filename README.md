@@ -421,6 +421,8 @@ where file_path = /tmp/openaiGA/policy_best.pkl in our case.
 - Changed hidden from 256 to 128
 - Changed batch_size from 256 to 64
 - Changed batch_size from 64 to 32
+- Changed batch_size from 32 to 25
+- Changed num_epochs from 20 to 15
 
 ## Experiments performed with AACHER
 - Increasing number of critics is increasing the performance (Number of actors is set to 1)
