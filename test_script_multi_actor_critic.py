@@ -8,7 +8,7 @@ os.system('python3 -m train '
           '--number_actors_target=1 '
           '--number_critics_target=3 '
           '--num_cpu=2 '
-          '--n_epochs=20')
+          '--n_epochs=15')
 
 # A1C5
 os.system('python3 -m train '
@@ -18,7 +18,7 @@ os.system('python3 -m train '
           '--number_actors_target=1 '
           '--number_critics_target=5 '
           '--num_cpu=2 '
-          '--n_epochs=20')
+          '--n_epochs=15')
 
 # A1C7
 os.system('python3 -m train '
@@ -28,7 +28,7 @@ os.system('python3 -m train '
           '--number_actors_target=1 '
           '--number_critics_target=7 '
           '--num_cpu=2 '
-          '--n_epochs=20')
+          '--n_epochs=15')
 
 # A1C8
 os.system('python3 -m train '
@@ -38,7 +38,7 @@ os.system('python3 -m train '
           '--number_actors_target=1 '
           '--number_critics_target=8 '
           '--num_cpu=2 '
-          '--n_epochs=20')
+          '--n_epochs=15')
 
 # A1C10
 os.system('python3 -m train '
@@ -48,7 +48,7 @@ os.system('python3 -m train '
           '--number_actors_target=1 '
           '--number_critics_target=10 '
           '--num_cpu=2 '
-          '--n_epochs=20')
+          '--n_epochs=15')
 
 # A3C3
 os.system('python3 -m train '
@@ -58,7 +58,7 @@ os.system('python3 -m train '
           '--number_actors_target=3 '
           '--number_critics_target=3 '
           '--num_cpu=2 '
-          '--n_epochs=20')
+          '--n_epochs=15')
 
 # A3C5
 os.system('python3 -m train '
@@ -68,7 +68,7 @@ os.system('python3 -m train '
           '--number_actors_target=3 '
           '--number_critics_target=5 '
           '--num_cpu=2 '
-          '--n_epochs=20')
+          '--n_epochs=15')
 
 # A5C7
 os.system('python3 -m train '
@@ -78,7 +78,7 @@ os.system('python3 -m train '
           '--number_actors_target=5 '
           '--number_critics_target=7 '
           '--num_cpu=2 '
-          '--n_epochs=20')
+          '--n_epochs=15')
 
 # A7C7
 os.system('python3 -m train '
@@ -88,7 +88,7 @@ os.system('python3 -m train '
           '--number_actors_target=7 '
           '--number_critics_target=7 '
           '--num_cpu=2 '
-          '--n_epochs=20')
+          '--n_epochs=15')
 
 # A8C8
 os.system('python3 -m train '
@@ -98,7 +98,7 @@ os.system('python3 -m train '
           '--number_actors_target=8 '
           '--number_critics_target=8 '
           '--num_cpu=2 '
-          '--n_epochs=20')
+          '--n_epochs=15')
 
 # A7C10
 os.system('python3 -m train '
@@ -108,7 +108,7 @@ os.system('python3 -m train '
           '--number_actors_target=7 '
           '--number_critics_target=10 '
           '--num_cpu=2 '
-          '--n_epochs=20')
+          '--n_epochs=15')
 
 # A10C10
 os.system('python3 -m train '
@@ -118,4 +118,4 @@ os.system('python3 -m train '
           '--number_actors_target=10 '
           '--number_critics_target=10 '
           '--num_cpu=2 '
-          '--n_epochs=20')
+          '--n_epochs=15')
