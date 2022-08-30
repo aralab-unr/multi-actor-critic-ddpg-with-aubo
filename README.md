@@ -422,6 +422,7 @@ where file_path = /tmp/openaiGA/policy_best.pkl in our case.
 - Changed batch_size from 256 to 64
 - Changed batch_size from 64 to 32
 - Changed batch_size from 32 to 25
+- Changed batch_size from 32 to 22
 - Changed num_epochs from 20 to 15
 
 ## Experiments performed with AACHER

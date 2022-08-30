@@ -274,7 +274,7 @@ def launch(
 @click.command()
 @click.option('--env', type=str, default='AuboReach-v5', help='the name of the OpenAI Gym environment that you want to train on')
 @click.option('--logdir', type=str, default='/home/adarshsehgal/AACHER_logs/DRL', help='the path to where logs and policy pickles should go. If not specified, creates a folder in /tmp/')
-@click.option('--n_epochs', type=int, default=20, help='the number of training epochs to run')
+@click.option('--n_epochs', type=int, default=15, help='the number of training epochs to run')
 @click.option('--num_cpu', type=int, default=2, help='the number of CPU cores to use (using MPI)')
 @click.option('--seed', type=int, default=0, help='the random seed used to seed both the environment and the training code')
 @click.option('--policy_save_interval', type=int, default=5, help='the interval with which policy pickles are saved. If set to 0, only the best and latest policy will be pickled.')
