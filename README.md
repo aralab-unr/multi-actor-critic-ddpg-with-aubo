@@ -92,7 +92,6 @@ sudo apt install python3-pip
 pip3 install -U catkin_tools
 pip3 install click
 conda install Pillow
-
 ```
 
 - Must have compiled the aubo robot github repo under the kinetic branch,which can be found here:
