@@ -157,3 +157,72 @@ Saving periodic policy to /home/adarshsehgal/AACHER_logs/A3C5-0/policy_5.pkl ...
 | train/success_rate | 0.0                 |
 --------------------------------------------
 New best success rate: 0.1. Saving policy to /home/adarshsehgal/AACHER_logs/A3C5-0/policy_best.pkl ...
+--------------------------------------------
+| epoch              | 7                   |
+| stats_g/mean       | 0.00983738          |
+| stats_g/std        | 0.9119059           |
+| stats_o/mean       | -8.70832e-05        |
+| stats_o/std        | 0.98268104          |
+| test/episode       | 160.0               |
+| test/mean_Q        | -4.733639           |
+| test/reward        | -87.59964006768831  |
+| test/steps         | 8000.0              |
+| test/success_rate  | 0.1                 |
+| train/episode      | 240.0               |
+| train/reward       | -124.19671401991354 |
+| train/steps        | 12000.0             |
+| train/success_rate | 0.0                 |
+--------------------------------------------
+New best success rate: 0.1. Saving policy to /home/adarshsehgal/AACHER_logs/A3C5-0/policy_best.pkl ...
+--------------------------------------------
+| epoch              | 8                   |
+| stats_g/mean       | 0.015197922         |
+| stats_g/std        | 0.90829265          |
+| stats_o/mean       | 0.007990444         |
+| stats_o/std        | 0.9633486           |
+| test/episode       | 180.0               |
+| test/mean_Q        | -4.3388658          |
+| test/reward        | -82.50691873237281  |
+| test/steps         | 9000.0              |
+| test/success_rate  | 0.125               |
+| train/episode      | 270.0               |
+| train/reward       | -104.8092263235747  |
+| train/steps        | 13500.0             |
+| train/success_rate | 0.03333333333333333 |
+--------------------------------------------
+New best success rate: 0.125. Saving policy to /home/adarshsehgal/AACHER_logs/A3C5-0/policy_best.pkl ...
+--------------------------------------------
+| epoch              | 9                   |
+| stats_g/mean       | 0.017664656         |
+| stats_g/std        | 0.90785015          |
+| stats_o/mean       | 0.011824196         |
+| stats_o/std        | 0.9519774           |
+| test/episode       | 200.0               |
+| test/mean_Q        | -5.1604576          |
+| test/reward        | -119.95488653456437 |
+| test/steps         | 10000.0             |
+| test/success_rate  | 0.5                 |
+| train/episode      | 300.0               |
+| train/reward       | -148.16852927680048 |
+| train/steps        | 15000.0             |
+| train/success_rate | 0.1                 |
+--------------------------------------------
+New best success rate: 0.5. Saving policy to /home/adarshsehgal/AACHER_logs/A3C5-0/policy_best.pkl ...
+--------------------------------------------
+| epoch              | 10                  |
+| stats_g/mean       | 0.013905076         |
+| stats_g/std        | 0.901428            |
+| stats_o/mean       | 0.0121329585        |
+| stats_o/std        | 0.9363829           |
+| test/episode       | 220.0               |
+| test/mean_Q        | -5.711011           |
+| test/reward        | -74.59440666992262  |
+| test/steps         | 11000.0             |
+| test/success_rate  | 0.55                |
+| train/episode      | 330.0               |
+| train/reward       | -93.48584779555125  |
+| train/steps        | 16500.0             |
+| train/success_rate | 0.13333333333333333 |
+--------------------------------------------
+New best success rate: 0.55. Saving policy to /home/adarshsehgal/AACHER_logs/A3C5-0/policy_best.pkl ...
+Saving periodic policy to /home/adarshsehgal/AACHER_logs/A3C5-0/policy_10.pkl ...

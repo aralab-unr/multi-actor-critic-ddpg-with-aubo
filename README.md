@@ -92,6 +92,13 @@ sudo apt install python3-pip
 pip3 install -U catkin_tools
 pip3 install click
 conda install Pillow
+conda install -c conda-forge nvidia-apex
+conda install -c anaconda cudatoolkit==10.0
+sudo apt-get install gcc-4.8
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 60 --slave /usr/bin/g++ g++ /usr/bin/g++-4.8
+sudo ln -s /usr/bin/gcc-4.8 /usr/local/cuda/bin/gcc
+sudo ln -s /usr/bin/g++-4.8 /usr/local/cuda/bin/g++
+sudo apt-get install g++-4.8
 ```
 
 - Must have compiled the aubo robot github repo under the kinetic branch,which can be found here:
@@ -190,7 +197,7 @@ sudo apt-get install python-scipy
 pip install scipy
 pip3 install scipy tqdm joblib cloudpickle click opencv-python
 ```
-- pip3 install tensorflow_gpu==1.14.0
+- pip3 install tensorflow_gpu==1.12.0
 - openai_ros
   - IMPORTANT: run rosdep install openai_ros EACH time you run the code (for each terminal)
 ```
@@ -276,12 +283,17 @@ mpirun -np 2 --bind-to core /home/adarshsehgal/anaconda3/envs/opensim-rl/bin/pyt
   - Make sure graphic card driver AND Cuda is installed
   - Use the link to find all the steps
   - Other link: https://medium.com/@kapilvarshney/how-to-setup-ubuntu-16-04-with-cuda-gpu-and-other-requirements-for-deep-learning-f547db75f227
-  - Cuda download link: https://developer.nvidia.com/cuda-80-ga2-download-archive
-  - cuda v10.0
-  - cuDNN v7.6.5
+  - Another link: https://towardsdatascience.com/deep-learning-gpu-installation-on-ubuntu-18-4-9b12230a1d31
+  - Cuda download link: https://developer.nvidia.com/cuda-90-download-archive?target_os=Linux&target_arch=x86_64&target_distro=Ubuntu&target_version=1604&target_type=runfilelocal
+  - CUDA 9.0 (9.0.76)
+  - cuDNN v7.0.5 (Dec 5, 2017), for CUDA 9.0
+  - Check versions compatibility: https://transang.me/cuda-cudnn-driver-gcc-tensorflow-python-version-compatibility-charts/
+  - Another link for compatibility: https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html
 ```
 pip3 install xgboost
 sudo apt-get install python3-apt
+sudo apt install nvidia-cuda-toolkit
+pip3 install tensorflow_gpu==1.12.0
 ```
 
 ## How to run the DDPG+HER training
