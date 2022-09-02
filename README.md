@@ -286,6 +286,7 @@ mpirun -np 2 --bind-to core /home/adarshsehgal/anaconda3/envs/opensim-rl/bin/pyt
   - Another link: https://towardsdatascience.com/deep-learning-gpu-installation-on-ubuntu-18-4-9b12230a1d31
   - Cuda download link: https://developer.nvidia.com/cuda-90-download-archive?target_os=Linux&target_arch=x86_64&target_distro=Ubuntu&target_version=1604&target_type=runfilelocal
   - CUDA 9.0 (9.0.76)
+  - cuDNN download link: https://developer.nvidia.com/rdp/cudnn-archive
   - cuDNN v7.0.5 (Dec 5, 2017), for CUDA 9.0
   - Check versions compatibility: https://transang.me/cuda-cudnn-driver-gcc-tensorflow-python-version-compatibility-charts/
   - Another link for compatibility: https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html
