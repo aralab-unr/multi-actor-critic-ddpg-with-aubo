@@ -59,7 +59,7 @@ reward_array={}
 mean_Q_array={}
 success_rate_array={}
 list_of_dirs = os.listdir(args.dir)
-epochs = 15
+epochs = 25
 
 for dir in  list_of_dirs:
     results = load_results(os.path.join(args.dir, dir, 'progress.csv'))

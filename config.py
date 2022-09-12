@@ -37,8 +37,8 @@ DEFAULT_PARAMS = {
     # env
     'max_u': 1.7,  # max absolute value of actions on different coordinates
     # ddpg
-    'layers': 2, #3 # number of layers in the critic/actor networks
-    'hidden': 128, #256 # number of neurons in each hidden layers
+    'layers': 3, #3 # number of layers in the critic/actor networks
+    'hidden': 256, #256 # number of neurons in each hidden layers
     'network_class': 'multi_actor_critic:MultiActorCritic', # ddpg = 'actor_critic:ActorCritic', ddpg_multi_actor_critic = 'multi_actor_critic:MultiActorCritic'
     'Q_lr': 0.001,  # critic learning rate
     'pi_lr': 0.001,  # actor learning rate

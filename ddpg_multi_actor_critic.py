@@ -118,17 +118,11 @@ class DDPGMultiActorCritic(object):
         policy = self.target if use_target_net else self.main
 
         # values to compute
-        policy_pi_tf_avg = policy.pi_tf_array[0]
-        for i in range(1, len(policy.pi_tf_array)):
-            policy_pi_tf_avg = policy_pi_tf_avg + policy.pi_tf_array[i]
-        policy_pi_tf_avg = policy_pi_tf_avg / len(policy.pi_tf_array)
+        policy_pi_tf_avg = policy.pi_tf_avg
         # vals = [policy.pi_tf]
         vals = [policy_pi_tf_avg]
 
-        policy_Q_pi_tf_avg = policy.Q_pi_tf_array[0]
-        for i in range(1, len(policy.Q_pi_tf_array)):
-            policy_Q_pi_tf_avg = policy_Q_pi_tf_avg + policy.Q_pi_tf_array[i]
-        policy_Q_pi_tf_avg = policy_Q_pi_tf_avg / len(policy.Q_pi_tf_array)
+        policy_Q_pi_tf_avg = policy.Q_pi_tf_avg
         if compute_Q:
             # vals += [policy.Q_pi_tf]
             vals += [policy_Q_pi_tf_avg]
@@ -190,10 +184,7 @@ class DDPGMultiActorCritic(object):
 
     def _grads(self):
         # Avoid feed_dict here for performance!
-        main_Q_pi_tf_avg = self.main.Q_pi_tf_array[0]
-        for i in range(1, len(self.main.Q_pi_tf_array)):
-            main_Q_pi_tf_avg = main_Q_pi_tf_avg + self.main.Q_pi_tf_array[i]
-        main_Q_pi_tf_avg = main_Q_pi_tf_avg / len(self.main.Q_pi_tf_array)
+        main_Q_pi_tf_avg = self.main.Q_pi_tf_avg
         critic_loss, actor_loss, Q_grad, pi_grad = self.sess.run([
             self.Q_loss_tf,
             # self.main.Q_pi_tf,
@@ -290,39 +281,27 @@ class DDPGMultiActorCritic(object):
 
         # loss functions
         # target_Q_pi_tf = self.target.Q_pi_tf
-        target_Q_pi_tf_array = self.target.Q_pi_tf_array
+        target_Q_pi_tf_avg = self.target.Q_pi_tf_avg
         clip_range = (-self.clip_return, 0. if self.clip_pos_returns else np.inf)
         # target_tf = tf.clip_by_value(batch_tf['r'] + self.gamma * target_Q_pi_tf, *clip_range)
         # Take average of actor networks
-        target_Q_pi_tf_avg = target_Q_pi_tf_array[0]
-        for i in range (1, len(target_Q_pi_tf_array)):
-            target_Q_pi_tf_avg = target_Q_pi_tf_avg + target_Q_pi_tf_array[i]
-        target_Q_pi_tf_avg = target_Q_pi_tf_avg/len(target_Q_pi_tf_array)
+
         if self.central_tendency == 'mean':
             target_tf = tf.clip_by_value(batch_tf['r'] + self.gamma * target_Q_pi_tf_avg, *clip_range)
         else:  # TODO: other means of central tendency to be implemented yet
             target_tf = tf.clip_by_value(batch_tf['r'] + self.gamma * target_Q_pi_tf, *clip_range)
 
         # self.Q_loss_tf = tf.reduce_mean(tf.square(tf.stop_gradient(target_tf) - self.main.Q_tf))
-        main_Q_tf_avg = self.main.Q_tf_array[0]
-        for i in range(1, len(self.main.Q_tf_array)):
-            main_Q_tf_avg = main_Q_tf_avg + self.main.Q_tf_array[i]
-        main_Q_tf_avg = main_Q_tf_avg / len(self.main.Q_tf_array)
+        main_Q_tf_avg = self.main.Q_tf_avg
         self.Q_loss_tf = tf.reduce_mean(tf.square(tf.stop_gradient(target_tf) - main_Q_tf_avg))
 
         # self.pi_loss_tf = -tf.reduce_mean(self.main.Q_pi_tf)
-        main_Q_pi_tf_avg = self.main.Q_pi_tf_array[0]
-        for i in range(1, len(self.main.Q_pi_tf_array)):
-            main_Q_pi_tf_avg = main_Q_pi_tf_avg + self.main.Q_pi_tf_array[i]
-        main_Q_pi_tf_avg = main_Q_pi_tf_avg / len(self.main.Q_pi_tf_array)
+        main_Q_pi_tf_avg = self.main.Q_pi_tf_avg
         self.pi_loss_tf = -tf.reduce_mean(main_Q_pi_tf_avg)
 
 
         # self.pi_loss_tf += self.action_l2 * tf.reduce_mean(tf.square(self.main.pi_tf / self.max_u))
-        main_pi_tf_avg = self.main.pi_tf_array[0]
-        for i in range(1, len(self.main.pi_tf_array)):
-            main_pi_tf_avg = main_pi_tf_avg + self.main.pi_tf_array[i]
-        main_pi_tf_avg = main_pi_tf_avg / len(self.main.pi_tf_array)
+        main_pi_tf_avg = self.main.pi_tf_avg
         self.pi_loss_tf = -tf.reduce_mean(main_Q_pi_tf_avg)
         self.pi_loss_tf += self.action_l2 * tf.reduce_mean(tf.square(main_pi_tf_avg / self.max_u))
 

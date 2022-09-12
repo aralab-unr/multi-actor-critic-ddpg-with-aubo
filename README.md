@@ -438,6 +438,11 @@ where file_path = /tmp/openaiGA/policy_best.pkl in our case.
 - Changed num_epochs from 20 to 15
 - GPU is enabled
 - Changed batch_size from 22 to 256
+- Changed how average is taken, it is now taken once per class (target/main)
+- Changed layers from 2 to 3
+- Changed hidden from 128 to 256
+- Changed epochs from 15 to 25
+- Changed num_cpu from 2 to 6
 
 ## Experiments performed with AACHER
 - Increasing number of critics is increasing the performance (Number of actors is set to 1)

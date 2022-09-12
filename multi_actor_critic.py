@@ -40,6 +40,13 @@ class MultiActorCritic:
             self.pi_tf_array = [] # creating array of networks for actors
             for i in range(0, number_actors):
                 self.pi_tf_array.append(self.max_u * tf.tanh(nn(input_pi, [self.hidden] * self.layers + [self.dimu], reuse=None, flatten=False, name=str('actor_'+str(i)))))
+
+            # taking averages
+            pi_tf_avg = self.pi_tf_array[0]
+            for i in range(1, len(self.pi_tf_array)):
+                pi_tf_avg = pi_tf_avg + self.pi_tf_array[i]
+            self.pi_tf_avg = pi_tf_avg / len(self.pi_tf_array)
+
         # critics
         with tf.variable_scope('Q'):
             # for policy training
@@ -63,3 +70,16 @@ class MultiActorCritic:
             for i in range(0, number_critics):
                 self.Q_tf_array.append(nn(input_Q, [self.hidden] * self.layers + [1], reuse=True, flatten=False, name=str('critic_'+str(i))))
             self.Q_tf_array = np.array(self.Q_tf_array)
+
+
+            # taking averages
+            Q_pi_tf_array = self.Q_pi_tf_array
+            Q_pi_tf_avg = Q_pi_tf_array[0]
+            for i in range(1, len(Q_pi_tf_array)):
+                Q_pi_tf_avg = Q_pi_tf_avg + Q_pi_tf_array[i]
+            self.Q_pi_tf_avg = Q_pi_tf_avg / len(Q_pi_tf_array)
+
+            Q_tf_avg = self.Q_tf_array[0]
+            for i in range(1, len(self.Q_tf_array)):
+                Q_tf_avg = Q_tf_avg + self.Q_tf_array[i]
+            self.Q_tf_avg = Q_tf_avg / len(self.Q_tf_array)
