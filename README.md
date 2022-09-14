@@ -443,6 +443,7 @@ where file_path = /tmp/openaiGA/policy_best.pkl in our case.
 - Changed hidden from 128 to 256
 - Changed epochs from 15 to 25
 - Changed num_cpu from 2 to 6
+- Plots are run for 12 epochs
 
 ## Experiments performed with AACHER
 - Increasing number of critics is increasing the performance (Number of actors is set to 1)
