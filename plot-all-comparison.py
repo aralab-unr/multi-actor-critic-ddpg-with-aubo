@@ -118,8 +118,8 @@ for config in sorted(reward_array.keys()):
     plt.plot(xs[0], np.nanmedian(ys, axis=0), label=config)
 
 plt.fill_between(xs[0], np.nanpercentile(ys, 25, axis=0), np.nanpercentile(ys, 75, axis=0), alpha=0.25)
-plt.title('Reward vs epochs')
-plt.xlabel('epochs')
+plt.title('Reward vs Epochs')
+plt.xlabel('Epochs')
 plt.ylabel('Reward')
 plt.legend()
 plt.savefig(os.path.join(args.dir, 'fig_{}.png'.format('rewardsVSepochs')))
@@ -135,8 +135,8 @@ for config in sorted(success_rate_array.keys()):
     plt.plot(xs[0], np.nanmedian(ys, axis=0), label=config)
 
 plt.fill_between(xs[0], np.nanpercentile(ys, 25, axis=0), np.nanpercentile(ys, 75, axis=0), alpha=0.25)
-plt.title('Success rate vs epochs')
-plt.xlabel('epochs')
+plt.title('Success rate vs Epochs')
+plt.xlabel('Epochs')
 plt.ylabel('Success rate')
 plt.legend()
 plt.savefig(os.path.join(args.dir, 'fig_{}.png'.format('successRateVSepochs')))
@@ -152,8 +152,8 @@ for config in sorted(mean_Q_array.keys()):
     plt.plot(xs[0], np.nanmedian(ys, axis=0), label=config)
 
 plt.fill_between(xs[0], np.nanpercentile(ys, 25, axis=0), np.nanpercentile(ys, 75, axis=0), alpha=0.25)
-plt.title('Average Q values vs epochs')
-plt.xlabel('epochs')
+plt.title('Average Q values vs Epochs')
+plt.xlabel('Epochs')
 plt.ylabel('Average Q value')
 plt.legend()
 plt.savefig(os.path.join(args.dir, 'fig_{}.png'.format('averageQVSepochs')))
