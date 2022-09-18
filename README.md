@@ -91,6 +91,7 @@ sudo apt-get install ros-kinetic-industrial-utils
 sudo apt install python3-pip
 pip3 install -U catkin_tools
 pip3 install click
+pip3 install seaborn==0.9.0
 conda install Pillow
 conda install -c conda-forge nvidia-apex
 conda install -c anaconda cudatoolkit==10.0
@@ -164,7 +165,6 @@ pip3 install rospkg
 pip install pyassimp
 pip3 install rotations
 pip install matplotlib
-pip install seaborn
 pip install glob2
 # pip3 install -U 'mujoco-py<2.2,>=2.1'
 sudo apt-get install patchelf
@@ -483,6 +483,15 @@ python plot-all-comparison-average.py <dir>
 python plot-all-comparison-average.py /home/adarshsehgal/workspace/multi-actor-critic-ddpg-with-aubo/Experiments/data
 ```
 where, dir = /home/adarshsehgal/workspace/multi-actor-critic-ddpg-with-aubo/Experiments/data in our case
+
+To plot AVERAGE OVER MULTIPLE RUNS including the shade showing all the values, test_success_rate, test_reward and test_mean_Q for various settings
+```
+python plot-all-comparison-average-shaded.py <dir>
+python plot-all-comparison-average-shaded.py /home/adarshsehgal/workspace/multi-actor-critic-ddpg-with-aubo/Experiments/data
+```
+where, dir = /home/adarshsehgal/workspace/multi-actor-critic-ddpg-with-aubo/Experiments/data in our case
+
+
 
 ## How to monitor CPU RAM usage:
 ```
