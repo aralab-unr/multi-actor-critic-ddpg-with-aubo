@@ -102,7 +102,7 @@ for dir in  list_of_dirs:
         success_rate_array[config][run] = []
     success_rate_array[config][run].append((x, y))
 
-    success_rate_converted = success_rate
+    success_rate_converted = y
 
     # reward
     assert reward.shape == epoch.shape
@@ -118,7 +118,7 @@ for dir in  list_of_dirs:
         reward_array[config][run] = []
     reward_array[config][run].append((x, y))
 
-    reward_converted = reward
+    reward_converted = y
 
     # mean_Q
     assert mean_Q.shape == epoch.shape
@@ -134,7 +134,7 @@ for dir in  list_of_dirs:
         mean_Q_array[config][run] = []
     mean_Q_array[config][run].append((x, y))
 
-    q_converted = mean_Q
+    q_converted = y
     # create csv
     for i, j, k, l in zip(x, success_rate_converted, reward_converted, q_converted):
         if i > epochs:
