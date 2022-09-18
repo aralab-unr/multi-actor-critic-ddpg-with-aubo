@@ -84,7 +84,6 @@ for dir in  list_of_dirs:
     reward = np.array(results['test/reward'])
     mean_Q = np.array(results['test/mean_Q'])
     epoch = np.array(results['epoch']) + 1
-    print(dir)
     config = dir.split("-")[0]
     run = dir.split("-")[1]
 
@@ -168,7 +167,7 @@ plt.title('Success rate vs Epochs')
 plt.xlabel('Epochs')
 plt.ylabel('Success rate')
 plt.legend()
-plt.savefig(os.path.join(args.dir, 'fig_{}.png'.format('fig_successRateVSepochs_3_shaded')))
+plt.savefig(os.path.join(args.dir, 'fig_{}.pdf'.format('fig_successRateVSepochs_3_shaded')))
 plt.show()
 
 #reward
@@ -183,7 +182,7 @@ plt.title('Reward vs Epochs')
 plt.xlabel('Epochs')
 plt.ylabel('Reward')
 plt.legend()
-plt.savefig(os.path.join(args.dir, 'fig_{}.png'.format('fig_rewardsVSepochs_3_shaded')))
+plt.savefig(os.path.join(args.dir, 'fig_{}.pdf'.format('fig_rewardsVSepochs_3_shaded')))
 plt.show()
 
 #q_value
@@ -198,7 +197,7 @@ plt.title('Average Q values vs Epochs')
 plt.xlabel('Epochs')
 plt.ylabel('Average Q value')
 plt.legend()
-plt.savefig(os.path.join(args.dir, 'fig_{}.png'.format('fig_averageQVSepochs_3_shaded')))
+plt.savefig(os.path.join(args.dir, 'fig_{}.pdf'.format('fig_averageQVSepochs_3_shaded')))
 plt.show()
 
 

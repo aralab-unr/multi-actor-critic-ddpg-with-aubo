@@ -122,7 +122,7 @@ plt.title('Reward vs Epochs')
 plt.xlabel('Epochs')
 plt.ylabel('Reward')
 plt.legend()
-plt.savefig(os.path.join(args.dir, 'fig_{}.png'.format('rewardsVSepochs')))
+plt.savefig(os.path.join(args.dir, 'fig_{}.pdf'.format('rewardsVSepochs')))
 plt.show()
 
 # plot success rate
@@ -139,7 +139,7 @@ plt.title('Success rate vs Epochs')
 plt.xlabel('Epochs')
 plt.ylabel('Success rate')
 plt.legend()
-plt.savefig(os.path.join(args.dir, 'fig_{}.png'.format('successRateVSepochs')))
+plt.savefig(os.path.join(args.dir, 'fig_{}.pdf'.format('successRateVSepochs')))
 plt.show()
 
 # plot Q value rate
@@ -156,6 +156,6 @@ plt.title('Average Q values vs Epochs')
 plt.xlabel('Epochs')
 plt.ylabel('Average Q value')
 plt.legend()
-plt.savefig(os.path.join(args.dir, 'fig_{}.png'.format('averageQVSepochs')))
+plt.savefig(os.path.join(args.dir, 'fig_{}.pdf'.format('averageQVSepochs')))
 plt.show()
 
