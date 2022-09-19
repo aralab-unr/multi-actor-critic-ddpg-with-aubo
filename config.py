@@ -1,7 +1,9 @@
 import numpy as np
 import gym
 import random
-
+# from stable_baselines.common.policies import MlpPolicy
+# from stable_baselines.common import make_vec_env
+# from stable_baselines import A2C
 import logger
 from ddpg import DDPG
 from ddpg_multi_actor_critic import DDPGMultiActorCritic
@@ -66,7 +68,7 @@ DEFAULT_PARAMS = {
     'norm_eps': 0.01,  # epsilon used for observation normalization
     'norm_clip': 5,  # normalized observations are cropped to this values
     # 'allow_soft_placement': True # to run the code on GPU
-    'rl_algo': 'ddpg_multi_actor_critic' # ddpg or ddpg_multi_actor_critic
+    'rl_algo': 'ddpg_multi_actor_critic' # ddpg or ddpg_multi_actor_critic or a2c
 
 }
 
@@ -209,6 +211,35 @@ def configure_ddpg_multi_actor_critic(dims, params, reuse=False, use_mpi=True, c
         'env_name': params['env_name'],
     }
     policy = DDPGMultiActorCritic(reuse=reuse, **ddpg_params, use_mpi=use_mpi)
+    return policy
+
+def configure_a2c(dims, params, reuse=False, use_mpi=True, clip_return=True):
+    sample_her_transitions = configure_her(params)
+    # Extract relevant parameters.
+    gamma = params['gamma']
+    #polyak = params['polyak']
+    rollout_batch_size = params['rollout_batch_size']
+    ddpg_params = params['ddpg_params']
+
+    input_dims = dims.copy()
+
+    env = cached_make_env(params['make_env'])
+    env.reset()
+    ddpg_params.update({'input_dims': input_dims,  # agent takes an input observations
+                        'T': params['T'],
+                        'clip_pos_returns': True,  # clip positive returns
+                        'clip_return': (1. / (1. - gamma)) if clip_return else np.inf,  # max abs of return
+                        'rollout_batch_size': rollout_batch_size,
+                        'subtract_goals': simple_goal_subtract,
+                        'sample_transitions': sample_her_transitions,
+                        'gamma': gamma,
+                        #'polyak': polyak,
+                        })
+    ddpg_params['info'] = {
+        'env_name': params['env_name'],
+    }
+    # policy = A2C(reuse=reuse, **ddpg_params, use_mpi=use_mpi)
+    policy = A2C(MlpPolicy, env, verbose=1)
     return policy
 
 

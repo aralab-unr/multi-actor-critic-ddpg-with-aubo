@@ -522,4 +522,12 @@ htop
 
 ```
 pip install stable-baselines3
+pip3 install stable-baselines
+```
+
+## How to run A2C
+- Change rl_algo in config.py to a2c
+```
+unset PYTHONPATH
+python3 train.py
 ```
